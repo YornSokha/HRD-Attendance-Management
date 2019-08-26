@@ -1,0 +1,2 @@
+bootstrapValidate('#name', 'min:5:Please enter academic name')
+bootstrapValidate(['#input2', '#input3'], 'contains:Peter:Needs to Contain "Peter"|min:20:Enter 20 character!|max:40:Enter 40 chars at most!');

@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main-layout}">
+<head>
+    <title>View Teacher</title>
+</head>
+<body>
+<div layout:fragment="content" class="sc bg-athens-gray">
+    <main class="sc h-100 pt-6em">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <a class="sc btn btn-light font-weight-bold text-button text-left back" role="button"><i class="fas fa-angle-left mr-2"></i><span th:text="#{sc.BACK}">back</span></a>
+                </div>
+            </div>
+
+            <div class="sc row pt-2em">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="sc breadcrumb h3 text-silver font-weight-bold bg-athens-gray">
+                            <li class="breadcrumb-item"><a class="back primaryForeColor link-client-custom" th:text="#{sc.Teacher}">Teacher</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                <span class="font-weight-normal" th:text="#{sc.View}">View</span><span th:text="#{sc.Teacher}">Teacher</span></li>
+                        </ol>
+                    </nav>
+                </div>
+
+            </div>
+            <div class="sc row pt-2em">
+                <div class="col-12">
+                    <div class="sc card shadow-1">
+                        <div class="sc card-header card-head">
+                            <h6 class="sc sub-title-1 font-weight-bold" th:text="#{sc.TeacherDetail}">Teacher Detail</h6>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="text-center"  >
+                                <img class="sc rounded-circle rounded img-fluid" th:src="'/image/'+ ${teacher.photo}" style="width: 150px; height: 150px">
+                            </div>
+
+                            <table class="table table-bordered sc mt-1em">
+                                <thead>
+                                    <th class="w-50 h-0 px-0 mx-0 py-0 px-0 border-0 invisible"></th>
+                                    <th class="w-50 h-0 px-0 mx-0 py-0 px-0 border-0 invisible"></th>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td scope="row" th:text="#{sc.id}">ID</td>
+                                    <td th:text="${teacher.id}">
+                                        <!--id-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" th:text="#{sc.FullName}">Full Name</td>
+                                    <td th:text="${teacher.fullName}">
+                                        <!--fullname-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" th:text="#{sc.Gender}">Gender</td>
+                                    <td th:text="${teacher.gender}">
+                                        <span class="badge badge-pill badge-primary">
+                                            <!--gender-->
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" th:text="#{sc.DateOfBirth}">Date of Birth</td>
+                                    <td th:text="${teacher.dob}">
+                                        <!--date of birth-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" th:text="#{sc.PhoneNumber}">Phone Number</td>
+                                    <td th:text="${teacher.phone}">
+                                        <!--phone number-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" th:text="#{sc.EmailAddress}">Email Address</td>
+                                    <td th:text="${teacher.email}">
+                                        <!--email-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" th:text="#{sc.PlaceOfBirth}">Place of Birth</td>
+                                    <td th:text="${teacher.pob}">
+                                        <!--place of birth-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" th:text="#{sc.Roles}">Roles</td>
+                                    <td>
+                                        <span class="badge badge-pill badge-primary"  th:each="authority : ${teacher.roles}"
+                                              th:if="${authority.getAuthority().startsWith('ROLE_')}"
+                                              th:text="${authority.getAuthority().replaceFirst('ROLE_', '')}">
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" th:text="#{sc.Status}">Status</td>
+                                    <td>
+                                    <span th:classappend="|${teacher.status eq true ? 'badge badge badge-pill badge-primary pb-1' : 'badge badge badge-pill badge-secondary pb-1'}|"
+                                          th:text="|${teacher.status eq true ? 'Active' : 'Inactive'}|">Active</span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

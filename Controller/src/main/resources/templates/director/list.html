@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/main-layout}">
+<head>
+    <title>Director</title>
+</head>
+<body>
+<div class="sc bg-athens-gray" id="wrapper" layout:fragment="content">
+    <main class="sc h-100 pt-6em">
+        <div class="container">
+            <div class="sc row pt-2em">
+                <h3 class="sc col-12 h3 text-silver font-weight-bold" th:text="#{sc.Director}">Director</h3>
+            </div>
+            <form action="/director/list" th:object="${user}">
+                <div class="sc row pt-1em">
+                    <!--Search by full-name -->
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <label class="sc sub-title-1" th:text="#{sc.searchFullName}">Search Fullname</label>
+                        <input class="sc form-control sub-title-1" type="search" aria-describedby="search_help" th:field="*{fullName}" th:value="*{fullName}" th:placeholder="#{sc.full-name}">
+                    </div>
+
+                    <div class="col-lg-6 col-md-5 d-flex justify-content-start align-items-end">
+                        <input class="sc btn btn-primary text-button" type="submit" value="search" th:value="#{sc.search}">
+                    </div>
+
+                    <div class="sc col-lg-2 col-md-3 col-sm-12 d-flex justify-content-end align-items-center pt-1em">
+                        <a class="sc btn btn-primary btn-block text-nowrap text-button" role="button" th:href="@{/director/add}"><i class="fas fa-user mr-2"></i><span th:text="#{sc.NEW}">New</span></a>
+                    </div>
+                </div>
+                <input id="limitStatic" name="limitStatic" type="hidden" th:value="${limitStatic}">
+            </form>
+            <div class="sc row pt-2em">
+                <div class="col-lg-12">
+                    <div class="table-responsize">
+                        <table class="sc table table-bordered bg-white">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col" th:text="#{sc.id}">Id</th>
+                                <th scope="col" th:text="#{sc.FullName}">Fullname</th>
+                                <th scope="col" th:text="#{sc.Gender}">Gender</th>
+                                <th scope="col" th:text="#{sc.DateOfBirth}">Date of Birth</th>
+                                <th scope="col" th:text="#{sc.PhoneNumber}">Phone Number</th>
+                                <th scope="col" th:text="#{sc.EmailAddress}">Email Address</th>
+                                <th scope="col" th:text="#{sc.Status}">Status</th>
+                                <th scope="col" th:text="#{sc.Function}">Function</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="director:${directors}">
+                                <td th:text="${director.id}">
+                                    <!--id-->
+                                </td>
+                                <td th:text="${director.fullName}">
+                                    <!--name-->
+                                </td>
+                                <td th:text="${director.gender}">
+                                    <!--gender-->
+                                </td>
+                                <td th:text="${director.dob}">
+                                    <!--dob-->
+                                </td>
+                                <td th:text="${director.phone}">
+                                    <!--phone-->
+                                </td>
+                                <td th:text="${director.email}">
+                                    <!--email-->
+                                </td>
+                                <td>
+                                    <span th:classappend="|${director.status eq true ? 'badge badge badge-pill badge-primary pb-1' : 'badge badge badge-pill badge-secondary pb-1'}|" th:text="|${director.status eq true ? 'Active' : 'Inactive'}|">Active</span>
+                                </td>
+                                <td>
+                                    <a class="badge badge-primary" th:href="@{/director/{viewId}(viewId=${director.id})}"><i class="sc far fa-smile square"></i></a>
+                                    <a class="badge badge-warning" th:href="@{/director/{editId}/edit(editId=${director.id})}"><i class="sc fas fa-pencil-alt square"></i></a>
+                                    <form th:action="@{/director/{id}(id=${director.id})}" th:method="delete" style="display: inline">
+                                        <a class="badge badge-danger" data-placement="top" data-toggle="tooltip" href="#" title="delete"><i class="sc fas fa-trash-alt square mt-1em text-white delete"></i>
+                                        </a>
+                                    </form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sc row pt-1em pb-2em">
+                <div class="col-lg-2 col-md-3 col-sm-12">
+                    <label class="sc sub-title-1" th:text="#{sc.ItemPerPage}">Item Per Page</label>
+                    <select class="sc custom-select sub-title-1" id="select_limit">
+                        <option th:attr="selected = ${limitStatic eq 10 ? 'selected' : null}" value="10">10</option>
+                        <option th:attr="selected = ${limitStatic eq 15 ? 'selected' : null}" value="15">15</option>
+                        <option th:attr="selected = ${limitStatic eq 20 ? 'selected' : null}" value="20">20</option>
+                    </select>
+                </div>
+
+                <!--Pagination-->
+                <div class="sc col-lg-10 col-md-9 col-sm-12 d-flex justify-content-end align-items-end pt-1em">
+                    <nav aria-label="Page navigation example slide-pagination" th:if="${paging.totalPages} > 1">
+                        <ul class="pagination pagination mb-0">
+                            <li class="page-item"><a class="page-link" th:href="@{/director/list/(page=1)}">First</a></li>
+                            <li class="page-item">
+                                <a class="page-link" aria-label="Previous" th:href="@{/director/list/(page=${paging.previousPage})}" >
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only" th:text="#{sc.Previous}">Previous</span>
+                                </a>
+                            </li>
+                            <li th:each="i: ${#numbers.sequence(paging.startPage, paging.endPage)}"
+                                th:class="${paging.page}==${i} ? 'page-item active': 'page-item' " >
+                                <a class="page-link" th:href="@{/director/list/(page=${i})}" th:text="${i}"></a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" aria-label="Next" th:href="@{/director/list/(page=${paging.nextPage})}">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only" th:text="#{sc.Next}">Next</span>
+                                </a>
+                            </li>
+                            <li class="page-item"><a class="page-link" th:href="@{/director/list/(page=${paging.totalPages})}">Last</a></li>
+                        </ul>
+                    </nav>
+
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<th:block layout:fragment="custom-script">
+    <script src="/script/app/view-student-list.js"></script>
+</th:block>
+</body>
+</html>

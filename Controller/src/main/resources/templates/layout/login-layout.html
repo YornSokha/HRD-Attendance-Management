@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <th:block th:insert="fragment/style"></th:block>
+        <th:block layout:fragment="custom-css"></th:block>
+        <title>User</title>
+    </head>
+    <body>
+
+        <div layout:fragment="content" id="wrapper"></div>
+        <!--footer.html  that's here  -->
+        <!--<div th:replace="/fragment/footer"></div>-->
+        <th:block th:replace="fragment/script"></th:block>
+        <th:block layout:fragment="custom-script"></th:block>
+    </body>
+</html>

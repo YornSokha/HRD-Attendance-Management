@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main-layout}">
+<head>
+    <title>Homepage</title>
+</head>
+<body>
+<div layout:fragment="content" class="sc bg-pickled-bluewood h-100">
+    <main class="sc h-100 pt-6em">
+        <div class="sc container mb-4em">
+            <div class="sc row my-4em mx-1em">
+                <h2 class="sc col-12 h2 text-white font-weight-bolder">
+                    <span th:text="#{sc.Welcome}"></span>
+                    <span th:text="${#authentication.principal.fullName + '!'}"></span>
+                </h2>
+                <h4 class="sc col-12 h4 text-white pt-sm" th:text="#{sc.WCWHU}">What can we help you?</h4>
+            </div>
+
+            <div class="sc row bg-athens-gray h-100 round-3 shadow-2">
+                <div class="container">
+                    <div class="sc row mx-1em my-2em">
+                        <h3 class="sc col-12 h3 font-weight-bold text-silver" th:text="#{sc.View}">Views</h3>
+                    </div>
+
+                    <div class="sc row mx-1em mb-2em">
+                        <th:block sec:authorize="hasRole('STUDENT')">
+                            <div class="sc col-lg-4 col-md-6 col-sm-12 mb-2em">
+                                <a class="sc d-flex btn btn-white btn-block round-border-1 view-size-lg shadow-1 active" th:href="@{/teacher/request-permission}" role="button" aria-pressed="true">
+                                    <span class="sc d-flex h5 font-weight-bold text-storm-grey text-left justify-content-start align-items-center padding-left-sm">
+                                        <span th:utext="#{sc.RequestPermissionApplicationWithBr}">Request Permission Application</span>
+                                    </span>
+                                </a>
+                            </div>
+                        </th:block>
+
+                        <div class="sc col-lg-4 col-md-6 col-sm-12 mb-2em">
+                            <a class="sc d-flex btn btn-white btn-block round-border-1 view-size-lg shadow-1 active" th:href="@{/attendance/pending-request/{id}(id=${#authentication.principal.id})}" aria-pressed="true">
+                                <span class="sc d-flex h5 font-weight-bold text-storm-grey text-left justify-content-start align-items-center padding-left-sm">
+                                    <span th:utext="#{sc.ViewPendingPermissionWithBr}">View Pending Permission</span>
+                                </span>
+                            </a>
+                        </div>
+
+                        <div class="sc col-lg-4 col-md-6 col-sm-12 mb-2em">
+                            <a class="sc d-flex btn btn-white btn-block round-border-1 view-size-lg shadow-1 active" th:href="@{/teacher/view-student-list}" role="button" aria-pressed="true">
+                                <span class="sc d-flex h5 font-weight-bold text-storm-grey text-left justify-content-start align-items-center padding-left-sm">
+                                    <span th:utext="#{sc.ViewStudentListWithBr}">View Student List</span>
+                                </span>
+                            </a>
+                        </div>
+
+                        <div class="sc col-lg-4 col-md-6 col-sm-12 mb-2em">
+                            <a class="sc d-flex btn btn-white btn-block round-border-1 view-size-lg shadow-1 active" th:href="@{/teacher/{id}/edit(id=${teacher.id})}" role="button" aria-pressed="true">
+                                <span class="sc d-flex h5 font-weight-bold text-storm-grey text-left justify-content-start align-items-center padding-left-sm" th:text="#{sc.MyProfile}">My Profile</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

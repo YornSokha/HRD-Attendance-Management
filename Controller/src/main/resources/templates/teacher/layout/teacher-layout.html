@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <th:block th:replace="fragment/style :: style"></th:block>
+        <title>Student</title>
+    </head>
+    <body>
+        <!--/.Navbar-->
+        <th:block th:include="fragment/navbar :: navbar"></th:block>
+
+        <div layout:fragment="content" id="wrapper"></div>
+        <!--footer.html  that's here  -->
+        <!--<div th:replace="/fragment/footer"></div>-->
+        <th:block th:replace="fragment/script"></th:block>
+    </body>
+</html>

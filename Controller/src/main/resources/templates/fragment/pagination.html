@@ -1,0 +1,51 @@
+<div th:fragment="pagination">
+    <div class="sc row pt-1em">
+        <div class="col-lg-2 col-md-3 col-4">
+            <label class="sc sub-title-1" for="select_page" th:text="#{sc.pagenetion.ItemPerPage}">Item Per Page</label>
+            <select class="sc custom-select sub-title-1" id="select_page" name="page">
+                <option selected="">All</option>
+            </select>
+        </div>
+
+        <div class="sc col-lg-10 col-md-9 col-8 d-flex justify-content-end align-items-end pt-1em">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination mb-0">
+                    <li class="page-item" th:classappend="${currentPage eq 1} ? disabled">
+                        <a th:href="@{/(page = 1, limit = 10)}" class="page-link"><i class="fas fa-step-backward"></i></a>
+                    </li>
+                    <li class="page-item" th:classappend="${currentPage eq 1} ? disabled">
+                        <a class="page-link" th:href="@{/(page = ${currentPage} - 1, limit = 10)}" tabindex="-1" th:text="#{sc.pagenetion.previous}">Previous</a>
+                    </li>
+
+                    <th:block th:if="${currentPage - 1 gt 0 and currentPage + 1 <= lastPage}">
+                        <li class="page-item" th:each="pageNo : ${#numbers.sequence(currentPage - 1, currentPage + 1)}"
+                            th:classappend="${currentPage eq pageNo}? 'active' : ''">
+                            <a class="page-link" th:href="@{/(page = ${pageNo}, limit = 10)}" th:text="${pageNo}" tabindex="-1"></a>
+                        </li>
+                    </th:block>
+
+                    <th:block th:if="${currentPage - 1 eq 0}">
+                        <li class="page-item" th:each="pageNo : ${#numbers.sequence(currentPage, lastPage > 3 ? currentPage + 2 : lastPage)}"
+                            th:classappend="${currentPage eq pageNo}? 'active' : ''">
+                            <a class="page-link" th:href="@{/(page = ${pageNo}, limit = 10)}" th:text="${pageNo}" tabindex="-1"></a>
+                        </li>
+                    </th:block>
+
+                    <th:block th:if="${currentPage eq lastPage}">
+                        <li class="page-item" th:each="pageNo : ${#numbers.sequence(currentPage - 2 < 1 ? 1 : currentPage - 2, currentPage)}"
+                            th:classappend="${currentPage eq pageNo}? 'active' : ''">
+                            <a class="page-link" th:href="@{/(page = ${pageNo}, limit = 10)}" th:text="${pageNo}" tabindex="-1"></a>
+                        </li>
+                    </th:block>
+
+                    <li class="page-item" th:classappend="${currentPage eq lastPage} ? disabled">
+                        <a class="page-link" th:href="@{/(page = ${currentPage} + 1, limit = 10)} th:text="#{sc.pagenetion.next}"">Next</a>
+                    </li>
+                    <li class="page-item" th:classappend="${currentPage eq lastPage} ? disabled">
+                        <a th:href="@{/(page = ${lastPage}, limit = 10)}" class="page-link"><i class="fas fa-step-forward"></i></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

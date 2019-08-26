@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/main-layout}">
+<head>
+    <title>View Report</title>
+    <th:block layout:fragment="custom-css">
+        <link href="/css/bootstrap-datepicker.css" rel="stylesheet">
+    </th:block>
+</head>
+<body>
+<div class="sc bg-athens-gray" layout:fragment="content">
+    <main class="sc h-100 pt-6em">
+        <div class="container">
+            <div class="row">
+                <a class="sc col-1 btn btn-light font-weight-bold text-button back" role="button"><i class="fas fa-arrow-left mr-2"></i>back</a>
+            </div>
+
+            <div class="sc row pt-2em">
+                <h3 class="sc col-12 h3 text-silver font-weight-bold" th:text="#{sc.ViewReport}">View Report</h3>
+            </div>
+
+            <div class="sc row pt-2em">
+                <div class="col-md-3 col-12">
+                    <label class="sc sub-title-1 pt-1em" th:text="#{sc.Academic}">Academic</label>
+                    <select class="sc custom-select sub-title-1" id="select_academic">
+                        <option value="0" selected th:text="#{sc.choose_academic}">choose academic</option>
+                        <option th:each="academic : ${academics}" th:text="${academic.name}" th:value="${academic.id}"></option>
+                    </select>
+                </div>
+
+                <div class="col-md-3 col-12">
+                    <label class="sc sub-title-1 pt-1em" th:text="#{sc.Generation}">Generation</label>
+                    <select class="sc custom-select sub-title-1" id="select_generation">
+                        <option value="0" selected th:text="#{sc.choose_generation}">choose generation</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3 col-12">
+                    <label class="sc sub-title-1 pt-1em" th:text="#{sc.Course}">Course</label>
+                    <select class="sc custom-select sub-title-1" id="select_course">
+                        <option value="0" selected th:text="#{sc.choose_course}">choose course</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3 col-12">
+                    <label class="sc sub-title-1 pt-1em" th:text="#{sc.Classroom}">Classroom</label>
+                    <select class="sc custom-select sub-title-1" id="select_classroom">
+                        <option value="0" selected th:text="#{sc.choose_classroom}">choose classroom</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="sc row">
+                <div class="sc col-md-3 col-12 pt-1em">
+                    <label class="sc sub-title-1" th:text="#{sc.Month}">Month</label>
+                    <div class="input-group date">
+                        <input class="form-control" id="date_picker" type="text">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sc col-md-3 col-12 d-flex justify-content-start align-items-end pt-1em">
+                    <button class="sc btn btn-primary text-button" id="btnPrint" th:text="#{sc.print}">print</button>
+
+                    <div class="sc btn-group ml-1em" role="group">
+                        <div class="btn-group" role="group">
+                            <button class="sc btn btn-primary dropdown-toggle text-button" id="btnExportGroup" data-toggle="dropdown" type="button" aria-expanded="false" aria-haspopup="true" th:text="#{sc.Export}">
+                                Export
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="btnExportGroup">
+                                <!--<button id="btnExportToPDF" class="sc dropdown-item text-button">PDF</button>-->
+                                <button class="sc dropdown-item text-button" id="btnExportToExcel">Excel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sc row pt-2em pb-2em" id="table-container">
+                <!--table here-->
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+<div layout:fragment="custom-script">
+    <script type="text/javascript" th:src="@{/script/app/bootstrap-datepicker.js}"></script>
+    <script type="text/javascript" th:src="@{/script/app/api.js}"></script>
+    <script type="text/javascript" th:src="@{/script/app/report.js}"></script>
+    <script type="text/javascript" th:src="@{/script/app/export-report.js}"></script>
+</div>
+</html>

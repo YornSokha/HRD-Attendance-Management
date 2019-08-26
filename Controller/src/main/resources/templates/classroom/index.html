@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main-layout}">
+<head>
+    <title>Classroom</title>
+</head>
+<body>
+<div layout:fragment="content" class="sc bg-athens-gray">
+    <main class="sc h-100 pt-6em">
+        <div class="container">
+            <div class="sc row pt-2em">
+                <h3 class="sc col-12 h3 text-silver font-weight-bold" th:utext="#{sc.Classroom}+${result}">Classroom</h3>
+            </div>
+            <form action="/classroom">
+                <div class="sc row pt-2em">
+                    <div class="sc col-lg-3 col-md-3 col-sm-12 pt-1em">
+                        <label class="sc sub-title-1" for="select_academic" ​ th:text="#{sc.Academic}">Academic</label>
+                        <select class="sc custom-select sub-title-1" id="select_academic" name="select_academic">
+                            <option selected="">All</option>
+                            <option th:each="academic: ${academics}" th:object="${academic}" th:value="*{id}"
+                                    th:text="*{name}"></option>
+                        </select>
+                    </div>
+
+                    <div class="sc col-lg-3 col-md-3 col-sm-12 pt-1em">
+                        <label class="sc sub-title-1" for="select_generation"
+                               th:text="#{sc.Generation}">Generation</label>
+                        <select class="sc custom-select sub-title-1" id="select_generation" name="select_generation">
+                            <option selected value="*">All</option>
+                        </select>
+                    </div>
+
+                    <div class="sc col-lg-3 col-md-3 col-sm-12 pt-1em">
+                        <label class="sc sub-title-1" for="select_course" th:text="#{sc.Course}">Course</label>
+                        <select class="sc custom-select sub-title-1" id="select_course" name="course">
+                            <option selected>All</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="sc row pt-1em">
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <label class="sc sub-title-1" th:text="#{sc.SearchClassroom}">Search Classroom</label>
+                        <input class="sc form-control sub-title-1" type="text" name="name"
+                               aria-describedby="search_help" placeholder="classroom" th:placeholder="#{sc.classroom}">
+                    </div>
+                    <div class="col-lg-6 col-md-5 d-flex justify-content-start align-items-end">
+                        <input type="submit" value="search" th:value="#{sc.search}"
+                               class="sc btn btn-primary text-button">
+                    </div>
+                    <div class="sc col-lg-2 col-md-3 col-sm-12 d-flex justify-content-end align-items-center pt-1em">
+                        <a class="sc btn btn-primary btn-block text-nowrap text-button" th:href="@{/classroom/add}"
+                           role="button"><i class="fas fa-shapes mr-2"></i><span th:text="#{sc.NEW}">New</span></a>
+                    </div>
+                </div>
+                <input type="hidden" id="limitStatic" name="limitStatic" th:value="${limitStatic}">
+            </form>
+
+            <div class="sc row pt-2em">
+                <div class="col-12">
+                    <table class="sc table table-bordered bg-white">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col" th:text="#{sc.id}">No</th>
+                            <th scope="col" th:text="#{sc.ClassroomName}">Classroom Name</th>
+                            <th scope="col" th:text="#{sc.Status}">Function</th>
+                            <th scope="col" th:text="#{sc.Function}">Function</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="classroom : ${classrooms}" th:object="${classroom}">
+                            <td th:text="${classroom.id}"></td>
+                            <td th:text="${classroom.className.name}"></td>
+                            <td>
+                                <span th:classappend="|${classroom.status eq true ? 'badge badge badge-pill badge-primary pb-1' : 'badge badge badge-pill badge-secondary pb-1'}|"
+                                      th:text="|${classroom.status eq true ? 'Active' : 'Inactive'}|">Active</span>
+                            </td>
+                            <td>
+                                <a class="badge badge-primary" th:href="@{/classroom/view/{id}(id=*{id})}"><i
+                                        class="sc far fa-smile square"></i></a>
+                                <a class="badge badge-warning" th:href="@{/classroom/edit/{id}(id=*{id})}"><i
+                                        class="sc fas fa-pencil-alt square"></i></a>
+                                <form th:action="@{/classroom/{id}(id=${classroom.id})}" th:method="delete"
+                                      style="display: inline">
+                                    <a class="badge badge-danger" data-toggle="tooltip" data-placement="top"
+                                       title="delete"><i
+                                            class="sc fas fa-trash-alt square mt-1em text-white delete"></i></a>
+                                </form>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="sc row pt-1em pb-2em">
+                <div class="col-lg-2 col-md-3 col-sm-12">
+                    <label class="sc sub-title-1" th:text="#{sc.ItemPerPage}">Item Per Page</label>
+                    <select class="sc custom-select sub-title-1" id="select_limit">
+                        <option th:attr="selected = ${limitStatic eq 10 ? 'selected' : null}" value="10">10</option>
+                        <option th:attr="selected = ${limitStatic eq 15 ? 'selected' : null}" value="15">15</option>
+                        <option th:attr="selected = ${limitStatic eq 20 ? 'selected' : null}" value="20">20</option>
+                    </select>
+                </div>
+
+                <!--Pagination-->
+                <div class="sc col-lg-10 col-md-9 col-sm-12 d-flex justify-content-end align-items-end pt-1em">
+                    <nav aria-label="Page navigation example slide-pagination" th:if="${paging.totalPages} > 1">
+                        <ul class="pagination pagination mb-0">
+                            <li class="page-item"><a class="page-link" th:href="@{/classroom/(page=1)}">First</a></li>
+                            <li class="page-item">
+                                <a class="page-link" aria-label="Previous" th:href="@{/classroom/(page=${paging.previousPage})}" >
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only" th:text="#{sc.Previous}">Previous</span>
+                                </a>
+                            </li>
+                            <li th:each="i: ${#numbers.sequence(paging.startPage, paging.endPage)}"
+                                th:class="${paging.page}==${i} ? 'page-item active': 'page-item' " >
+                                <a class="page-link" th:href="@{/classroom/(page=${i})}" th:text="${i}"></a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" aria-label="Next" th:href="@{/classroom/(page=${paging.nextPage})}">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only" th:text="#{sc.Next}">Next</span>
+                                </a>
+                            </li>
+                            <li class="page-item"><a class="page-link" th:href="@{/classroom/(page=${paging.totalPages})}">Last</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<div layout:fragment="custom-script">
+    <script src="/script/app/list-classroom.js"></script>
+</div>
+</body>
+</html>

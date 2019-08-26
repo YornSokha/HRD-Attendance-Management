@@ -1,0 +1,120 @@
+<div th:fragment="menu-sidebar">
+
+
+    <!--******************** Side bar *************** -->
+    <div class="side-bar" id="side-bar">
+        <nav id="sidebar" class="dark sidebar-blue ps">
+            <ul id="main-nav">
+                <li class="">
+                    <a th:href="@{/dashboard}">
+                        <i class="fas fa-2x fa-chart-line"></i>
+                        <p th:text="#{sc.Dashboard}">Dashboard</p>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a href="#">
+                        <i class="fas fa-2x fa-graduation-cap"></i>
+                        <p th:text="#{sc.Academic}">Academic</p>
+                    </a>
+                    <ul class="sub-nav sidebar-blue">
+                        <li class="">
+                            <a class="sc btn btn-outline-primary mx-1em" th:href="@{/get-start}">
+                                <span th:text="#{sc.GetStarted}">Get Started</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a th:href="@{/academic}">
+                                <span th:text="#{sc.Academic}">Academic</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a th:href="@{/generation}">
+                                <span th:text="#{sc.Generation}">Generation</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a th:href="@{/course}">
+                                <span th:text="#{sc.Course}">Course</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a th:href="@{/classroom}">
+                                <span th:text="#{sc.Classroom}">Classroom</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="">
+                    <a th:href="@{/attendance/pending-request}">
+                        <i class="far fa-2x fa-calendar-alt"></i>
+                        <p th:text="#{sc.PendingRequest}">Pending Request</p>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <i class="far fa-2x fa-clipboard"></i>
+                        <p th:text="#{sc.Attendances}">Attendance</p>
+                    </a>
+                    <ul class="sub-nav sidebar-blue">
+                        <li class="">
+                            <a th:href="@{/attendance}">
+                                <span th:text="#{sc.Attendances}">Attendance</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a th:href="@{/attendance/pending-request}">
+                                <span th:text="#{sc.Pending}">Pending</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="">
+                    <a href="#">
+                        <i class="far fa-2x fa-user"></i>
+                        <p th:text="#{sc.User}">User</p>
+                    </a>
+                    <ul class="sub-nav sidebar-blue">
+                        <li class="">
+                            <a th:href="@{/student/list}">
+                                <span th:text="#{sc.Student}">Student</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a th:href="@{/teacher/list}">
+                                <span th:text="#{sc.Teacher}">Teacher</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a th:href="@{/director/list}">
+                                <span th:text="#{sc.Director}">Director</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a th:href="@{/admin/list}">
+                                <span th:text="#{sc.Admin}">Admin</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="">
+                    <a th:href="@{/report}">
+                        <i class="far fa-2x fa-newspaper"></i>
+                        <p th:text="#{sc.Report}">Report</p>
+                    </a>
+                </li>
+            </ul>
+            <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+                <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+            </div>
+            <div class="ps__rail-y" style="top: 0px; right: 0px;">
+                <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div>
+            </div>
+        </nav>
+    </div>
+
+
+
+</div>

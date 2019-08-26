@@ -1,0 +1,127 @@
+<div th:fragment="navbar">
+    <!-- *******************/Navbar ************************* -->
+    <nav class="sc navbar navbar-expand-lg navbar-light nav-shadow fixed-top bg-white">
+        <div class="container-fluid navbar-main-container">
+            <div class="row navbar-row">
+                <div class="col-5" id="leftside-navbar">
+                    <div class="humburger-button" id="btn-sidebar" onclick="myFunction(this)">
+                        <div class="bar1"></div>
+                        <div class="bar2"></div>
+                        <div class="bar3"></div>
+                    </div>
+                    <a href="/director/" sec:authorize="hasRole('ROLE_DIRECTOR')">
+                        <img id="logo" src="/image/somChbabLogo2.png" alt="logo"></a>
+                    <a href="/dashboard/" sec:authorize="hasRole('ROLE_ADMIN')">
+                        <img id="logo" src="/image/somChbabLogo2.png" alt="logo"></a>
+                    <a href="/teacher/" sec:authorize="hasRole('ROLE_TEACHER')">
+                        <img id="logo" src="/image/somChbabLogo2.png" alt="logo"></a>
+                    <a href="/student/" sec:authorize="hasRole('ROLE_STUDENT')">
+                        <img id="logo" src="/image/somChbabLogo2.png" alt="logo"></a>
+                </div>
+
+
+                <div class="col-5" id="rightside-navbar">
+
+                    <div class="form-inline my-2 my-lg-0 form-inline-rightside ">
+
+                        <!----------------- notification bell block ----------------->
+                        <!-- <div class="verticle-line"></div> -->
+                        <div style="visibility: hidden">
+                            <div class="nav-item dropdown" aria-labelledby="dropdownMenu1">
+                                <a class="nav-link notification-bell " data-toggle="dropdown" href="#" role="button" aria-expanded="false" aria-haspopup="true"><i class="sc fas fa-bell bell-notification text-storm-grey" style="font-size:30px"></i><span class="material-icons text-danger badge-notification mt-5" data-badge="2"></span></a>
+
+
+                                <div class="dropdown-menu notification-dropdown-container" aria-labelledby="customDropdown">
+                                    <span class="dropdown-menu-arrow"></span>
+                                    <div class="notifications-title">
+                                        <h6>Notifications</h6>
+                                    </div>
+                                    <div class="new-notification-container">
+                                        <h6 class="new-notification">NEW</h6>
+                                    </div>
+                                    <a class="dropdown-item-notification" href="#">
+                                        <div class="row each-notification">
+                                            <div class="col-2"><img class="rounded-circle rounded-circle-image" src="/image/default-profile.jpg" alt="..."></div>
+                                            <div class="sc col-10 text-storm-grey">
+                                                <b>Username</b>&nbsp;<span>requested for Late </span><br><span>4 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item-notification" href="#">
+                                        <div class="row each-notification">
+                                            <div class="col-2"><img class="rounded-circle rounded-circle-image" src="/image/default-profile.jpg" alt="..."></div>
+                                            <div class="sc col-10 text-storm-grey">
+                                                <b>Username</b>&nbsp;<span>requested for Take Leave </span><br><span>4 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item-notification" href="#">
+                                        <div class="row each-notification">
+                                            <div class="col-2"><img class="rounded-circle rounded-circle-image" src="/image/default-profile.jpg" alt="..."></div>
+                                            <div class="sc col-10 text-storm-grey">
+                                                <b>Username</b>&nbsp;<span>requested for Late </span><br><span>4 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item-notification" href="#">
+                                        <div class="row each-notification">
+                                            <div class="col-2"><img class="rounded-circle rounded-circle-image" src="/image/default-profile.jpg" alt="..."></div>
+                                            <div class="sc col-10 text-storm-grey">
+                                                <b>Username</b>&nbsp;<span>requested for Late </span><br><span>4 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+
+                                    <a href="">
+                                        <p class="text-primary text-center"> View all notifications</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="verticle-line"></div> -->
+                        <!----------------- notification bell block ----------------->
+                        <div class="photo">
+                            <a sec:authorize="hasRole('ROLE_DIRECTOR')" th:href="@{/director/{id}(id=${#authentication.principal.id})}">
+                                <img class="rounded-circle navbar-rounded-circle-image" alt="..." th:src="'http://110.74.194.125:15001/image/' + ${#authentication.principal.photo}">
+                            </a>
+                            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/{id}(id=${#authentication.principal.id})}">
+                                <img class="rounded-circle navbar-rounded-circle-image" alt="..." th:src="'http://110.74.194.125:15001/image/' + ${#authentication.principal.photo}">
+                            </a>
+                            <a sec:authorize="hasRole('ROLE_TEACHER')" th:href="@{/teacher/{id}(id=${#authentication.principal.id})}">
+                                <img class="rounded-circle navbar-rounded-circle-image" alt="..." th:src="'http://110.74.194.125:15001/image/' + ${#authentication.principal.photo}">
+                            </a>
+                            <a sec:authorize="hasRole('ROLE_STUDENT')" th:href="@{/student/{id}(id=${#authentication.principal.id})}">
+                                <img class="rounded-circle navbar-rounded-circle-image" alt="..." th:src="'http://110.74.194.125:15001/image/' + ${#authentication.principal.photo}">
+                            </a>
+                        </div>&nbsp;&nbsp;
+                        <div class="navbar-username"><a class="sc navbar-username-a text-storm-grey" href="#"><b th:text="${#authentication.principal.fullName}"></b></a></div>
+
+                        <div class="dropdown show account-option-dropdown">
+                            <a class="sc dropdown-toggle text-storm-grey" id="dropdownMenuLink" data-toggle="dropdown" href="#" role="button" aria-expanded="false" aria-haspopup="true"></a>
+                            <div class="dropdown-menu account-dropdown" aria-labelledby="dropdownMenuLink">
+                                <span class="dropdown-menu-arrow-account"></span>
+                                <div class="email-container">
+                                    <a class="dropdown-item text-left" href="#" th:text="${#authentication.principal.email}"></a>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" sec:authorize="hasRole('ROLE_DIRECTOR')" th:href="@{/director/{id}(id=${#authentication.principal.id})}">My Profile</a>
+                                <a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/{id}(id=${#authentication.principal.id})}">My Profile</a>
+                                <a class="dropdown-item" sec:authorize="hasRole('ROLE_TEACHER')" th:href="@{/teacher/{id}(id=${#authentication.principal.id})}">My Profile</a>
+                                <a class="dropdown-item" sec:authorize="hasRole('ROLE_STUDENT')" th:href="@{/student/{id}(id=${#authentication.principal.id})}">My Profile</a>
+                                <a class="dropdown-item" href="/logout">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2 language-icon-block">
+                    <a href="?lang=kh"><img class="kh-lang-icon" src="/image/kh-flag.png" alt="en-flag"></a>
+                    <a href="?lang=en"><img class="en-lang-icon" src="/image/en-flag.png" alt="en-flag"></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>

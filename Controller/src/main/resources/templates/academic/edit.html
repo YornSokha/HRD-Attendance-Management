@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main-layout}">
+<head>
+    <title>Edit Academic</title>
+</head>
+<body>
+<div layout:fragment="content" class="sc bg-athens-gray">
+    <main class="sc h-100 pt-6em">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <a class="sc btn btn-light font-weight-bold text-button text-left back" role="button">
+                        <i class="fas fa-angle-left mr-2"></i><span th:text="#{sc.BACK}">back</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="sc row pt-2em">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="sc breadcrumb h3 text-silver font-weight-bold bg-athens-gray">
+                            <li class="breadcrumb-item">
+                                <a th:href="@{/academic}"><span th:text="#{sc.Academic}">Academic</span></a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                <span class="font-weight-normal" th:text="#{sc.Edit}">Edit</span>
+                                <span th:text="#{sc.Academic}">Academic</span>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="sc row pt-2em">
+                <div class="sc col-12">
+                    <form action="/academic/update" th:object="${academic}" method="post">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                        <input type="hidden" th:field="*{id}" th:value="${academic.id}">
+
+                        <div class="sc card shadow-1">
+                            <div class="sc card-header card-head">
+                                <h6 class="sc sub-title-1 font-weight-bold"
+                                    th:text="#{sc.EditAcademic}">Edit Academic</h6>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="sc col-12">
+                                    <label class="sc sub-title-1" th:text="#{sc.AcademicName}">Academic Name</label>
+                                    <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:text="'*' + #{academic_name.valid}"></span>
+                                    <input class="sc form-control sub-title-1" th:value="${academic.name}" th:field="*{name}" type="text" aria-describedby="academic_help" placeholder="academic name" th:placeholder="#{sc.academic-name}">
+                                </div>
+
+                                <div class="sc col-lg-2 col-sm-3 col-12 py-1em">
+                                    <label class="sc sub-title-1" th:text="#{sc.Status}">Status</label>
+                                    <select class="custom-select sc sub-title-1" th:field="*{status}">
+                                        <option th:value="true">Active</option>
+                                        <option th:value="false" th:attr="selected = ${academic.status ne true ? 'selected' : null}">Inactive</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="card-footer text-muted text-right">
+                                <button class="sc col-lg-1 col-md-2 col-sm-12 btn btn-primary text-button text-nowrap" type="submit" th:text="#{sc.UPDATE}">Update</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

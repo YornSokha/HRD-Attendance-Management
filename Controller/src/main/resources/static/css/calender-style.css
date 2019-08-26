@@ -1,0 +1,95 @@
+th,.text-center{
+    text-align: center;
+}
+td.text-center{
+    padding: 0px! important;
+    margin: 0px !important;
+}
+/*td.w{
+    width: 70px !important;
+    height: 70px !important;
+}*/
+.font-big-icon{
+  font-size: 30px;
+  color: red;
+}
+tr>th{
+    padding:  5px 5px 0px 5px!important;
+    width: 4.55rem!important;
+}
+/* .table-bordered td, .table-bordered th {
+    border: none;
+} */
+span>input{
+    width: 25px!important
+}
+thead>tr{
+    border: none;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+.hidden-box {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  opacity: 0;
+}
+.check--label-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-item-align: center;
+  align-self: center;
+  position: relative;
+  height: 15px;
+  width: 15px;
+  margin: auto;
+  border: 1px solid #3498db;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.check--label-box-disable {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-item-align: center;
+  align-self: center;
+  position: relative;
+  height: 15px;
+  width: 15px;
+  margin: auto;
+  border: 1px solid #74b1da;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.hidden-box:checked + .check--label .check--label-box {
+  border: 1px solid #949FFF;
+}
+.hidden-box:checked + .check--label .check--label-box:after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 3px;
+  width: 5px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+label.check--label {
+    display: inline-flex;
+    width: 50%;
+}
+.div-temp-custom{
+  height: 20px;
+}
+button#next:hover,button#previous:hover {
+  background-color: #949FFF;
+}

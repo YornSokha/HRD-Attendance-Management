@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main-layout}">
+<head>
+    <title>View Generation</title>
+</head>
+<body>
+<div layout:fragment="content" class="sc bg-athens-gray">
+    <main class="sc h-100 pt-6em">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <a class="sc btn btn-light font-weight-bold text-button text-left back" role="button"><i class="fas fa-angle-left mr-2"></i><span th:text="#{sc.BACK}">back</span></a>
+                </div>
+            </div>
+
+            <div class="sc row pt-2em">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="sc breadcrumb h3 text-silver font-weight-bold bg-athens-gray">
+                            <li class="breadcrumb-item"><a th:href="@{/generation}">Generation</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                <span class="font-weight-normal" th:text="#{sc.View}">View</span><span th:text="#{sc.Generation}">Generation</span></li>
+                        </ol>
+                    </nav>
+                </div>
+
+            </div>
+
+            <div class="sc row pt-2em">
+                <div class="col-12">
+                    <div class="sc card shadow-1">
+                        <div class="sc card-header card-head">
+                            <h6 class="sc sub-title-1 font-weight-bold" th:text="#{sc.GenerationDetail}">Generation Detail</h6>
+                        </div>
+
+                        <div class="card-body">
+                            <table class="table table-bordered sc pt-1em">
+                                <thead>
+                                <th class="w-50 h-0 px-0 mx-0 py-0 px-0 border-0 invisible"></th>
+                                <th class="w-50 h-0 px-0 mx-0 py-0 px-0 border-0 invisible"></th>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td scope="row" th:text="#{sc.id}">No</td>
+                                    <td th:text="${generation.id}"></td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" th:text="#{sc.InAcademic}">In Academic</td>
+                                    <td th:text="${generation.academic.name}"></td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" th:text="#{sc.GenerationName}">Generation Name</td>
+                                    <td th:text="${generation.name}"></td>
+                                </tr>
+                                <tr>
+                                    <td scope="row">Status</td>
+                                    <td>
+                                        <span th:classappend="|${generation.status eq true ? 'badge badge badge-pill badge-primary pb-1' : 'badge badge badge-pill badge-secondary pb-1'}|"
+                                         th:text="|${generation.status eq true ? 'Active' : 'Inactive'}|">Active</span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

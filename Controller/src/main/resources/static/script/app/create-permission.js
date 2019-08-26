@@ -1,0 +1,1 @@
+bootstrapValidate('#duration', 'integer:Please enter valid duration(minute)')

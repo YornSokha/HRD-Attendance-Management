@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main-layout}">
+<head>
+    <title>Request Permission Application</title>
+</head>
+<body>
+<div layout:fragment="content" class="sc bg-athens-gray overflow-auto">
+    <main class="sc h-100 pt-6em">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <a class="sc btn btn-light font-weight-bold text-button text-left back" role="button"><i class="fas fa-angle-left mr-2"></i><span th:text="#{sc.BACK}">back</span></a>
+                </div>
+            </div>
+
+            <div class="sc row pt-2em">
+                <h3 class="sc col-12 h3 text-silver font-weight-bold"><span
+                        class="font-weight-normal" th:text="#{sc.Request}">Request</span><span th:text="#{sc.PermissionApplication}">Permission Application</span>
+                </h3>
+            </div>
+
+
+            <div class="sc row pt-2em">
+                <div class="sc col-lg-4 col-12 pt-2em">
+                    <div class="sc bg-white round-1 shadow-1 py-1em" id="permission_container">
+                        <div class="col-12">
+                            <label class="sc sub-title-1" for="select_permission_type" th:text="#{sc.PermissionType}">Permission Type</label>
+                            <select class="sc custom-select sub-title-1" id="select_permission_type"
+                                    name="permission_type">
+                                <option selected value="-1"></option>
+                                <option value="0">Late</option>
+                                <option value="1">Go outside</option>
+                                <option value="2">Leave early</option>
+                                <option value="3">Half/Full day</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sc col-lg-8 col-12 py-2em">
+                    <div class="sc d-flex bg-white round-1 shadow-1" id="datepicker_container" style="height: 90px;">
+                        <h5 class="sc d-flex w-100 align-items-center justify-content-center h5 text-storm-grey">please
+                            fill the missing fields</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

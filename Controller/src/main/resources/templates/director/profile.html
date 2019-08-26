@@ -1,0 +1,218 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main-layout}">
+<head>
+    <title>My Profile</title>
+</head>
+<body>
+<div layout:fragment="content" class="sc bg-athens-gray">
+    <main class="sc h-100 pt-6em">
+        <div class="container">
+            <div class="row">
+                <a class="sc col-1 btn btn-light font-weight-bold text-button class" role="button"><i class="fas fa-arrow-left mr-2"></i>back</a>
+            </div>
+
+            <div class="sc row pt-2em">
+                <h3 class="sc col-12 h3 text-silver font-weight-bold"><span class="font-weight-normal">My</span>Profile
+                </h3>
+            </div>
+
+            <div class="sc row pt-2em">
+                <div class="col-12">
+                    <div class="sc card shadow-1">
+                        <div class="sc card-header card-head">
+                            <h6 class="sc sub-title-1 font-weight-bold">Personal Information</h6>
+                        </div>
+
+                        <div class="card-body">
+                            <form>
+                                <div class="sc row px-4em py-1em">
+                                    <div class="col-lg-3 col-md-4 col-12">
+                                        <div class="row">
+                                            <img class="sc col-12 rounded-circle rounded img-fluid"
+                                                 src="https://semantic-ui.com/images/avatar2/large/matthew.png"
+                                                 width="150px" height="150px">
+                                            <div class="sc col-12 pt-1em">
+                                                <div class="custom-file">
+                                                    <input class="sc custom-file-input sub-title-1"
+                                                           id="file_input_profile" type="file"
+                                                           aria-describedby="input_group_addon">
+                                                    <label class="sc custom-file-label sub-title-1"
+                                                           for="file_input_profile">browser</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-9 col-md-8 col-12">
+                                        <div class="row">
+                                            <div class="sc col-lg-9 col-md-8 col-12 pt-1em">
+                                                <label class="sc sub-title-1" for="text_fullname">Full
+                                                    Name</label>
+                                                <input class="sc form-control sub-title-1"
+                                                       id="text_fullname" name="fullname"
+                                                       type="text" aria-describedby="full_name_help"
+                                                       placeholder="fullname">
+                                                <small class="sc form-text text-muted caption pt-sm"
+                                                       id="full_name_help">MESSAGE
+                                                </small>
+                                            </div>
+
+                                            <div class="sc col-lg-3 col-md-4 col-12 pt-1em">
+                                                <label class="sc sub-title-1"
+                                                       for="gender">Gender</label>
+                                                <select class="sc form-control sub-title-1"
+                                                        id="gender" name="gender">
+                                                    <option selected=""></option>
+                                                    <option value="M">male</option>
+                                                    <option value="F">female</option>
+                                                    <option value="O">other</option>
+                                                </select>
+                                                <small class="sc form-text text-muted caption pt-sm"
+                                                       id="gender_help">MESSAGE
+                                                </small>
+                                            </div>
+
+                                            <div class="sc col-12 pt-1em">
+                                                <label class="sc sub-title-1" for="date_dob">Date of
+                                                    Birth</label>
+                                                <input class="sc form-control sub-title-1"
+                                                       id="date_dob" name="dob" type="datetime"
+                                                       aria-describedby="dob_help"
+                                                       placeholder="date of birth">
+                                                <small class="sc form-text text-muted caption pt-sm"
+                                                       id="dob_help">MESSAGE
+                                                </small>
+                                            </div>
+
+                                            <div class="sc col-12 pt-1em">
+                                                <label class="sc sub-title-1" for="nationality">Nationality</label>
+                                                <input class="sc form-control sub-title-1"
+                                                       id="nationality" name="nationality"
+                                                       type="text"
+                                                       aria-describedby="nationality_help"
+                                                       placeholder="nationality">
+                                                <small class="sc form-text text-muted caption pt-sm"
+                                                       id="nationality_help">MESSAGE
+                                                </small>
+                                            </div>
+
+                                            <div class="sc col-12 pt-1em">
+                                                <label class="sc sub-title-1"
+                                                       for="text_phone_number">Phone
+                                                    Number</label>
+                                                <input class="sc form-control sub-title-1"
+                                                       id="text_phone_number" name="phone_number"
+                                                       type="text"
+                                                       aria-describedby="phone_number_help"
+                                                       placeholder="phone number">
+                                                <small class="sc form-text text-muted caption pt-sm"
+                                                       id="phone_number_help">MESSAGE
+                                                </small>
+                                            </div>
+
+                                            <div class="sc col-12 pt-1em">
+                                                <label class="sc sub-title-1" for="email_address">Email
+                                                    Address</label>
+                                                <input class="sc form-control sub-title-1"
+                                                       id="email_address" name="email_address"
+                                                       type="email"
+                                                       aria-describedby="email_address_help"
+                                                       placeholder="email address">
+                                                <small class="sc form-text text-muted caption pt-sm"
+                                                       id="email_address_help">MESSAGE
+                                                </small>
+                                            </div>
+
+                                            <div class="sc col-12 pt-1em">
+                                                <label class="sc sub-title-1" for="pob">Place of
+                                                    Birth</label>
+                                                <textarea class="sc form-control sub-title-1"
+                                                          id="pob" name="pob" rows="3"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="card-footer text-right">
+                            <a class="sc btn btn-primary text-button text-nowrap" th:href="@{/student}" role="button">Save Changes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sc row pt-2em pb-3em">
+                <div class="col-12">
+                    <div class="sc card shadow-1">
+                        <div class="sc card-header card-head">
+                            <h6 class="sc sub-title-1 font-weight-bold">Reset Password</h6>
+                        </div>
+
+                        <div class="card-body">
+                            <form>
+                                <div class="sc row px-4em py-1em">
+                                    <div class="col-lg-3 col-md-4 col-12">
+                                    </div>
+
+                                    <div class="col-lg-9 col-md-8 col-12">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <label class="sc sub-title-1"
+                                                       for="text_old_password">Old
+                                                    Password</label>
+                                                <input class="sc form-control sub-title-1"
+                                                       id="text_old_password" name="old_password"
+                                                       type="text"
+                                                       aria-describedby="old_password_help"
+                                                       placeholder="old password">
+                                                <small class="sc form-text text-muted caption pt-sm"
+                                                       id="old_password_help">MESSAGE
+                                                </small>
+                                            </div>
+
+                                            <div class="sc col-12 pt-1em">
+                                                <label class="sc sub-title-1"
+                                                       for="text_new_password">New
+                                                    Password</label>
+                                                <input class="sc form-control sub-title-1"
+                                                       id="text_new_password" name="new_password"
+                                                       type="text"
+                                                       aria-describedby="new_password_help"
+                                                       placeholder="new password">
+                                                <small class="sc form-text text-muted caption pt-sm"
+                                                       id="new_password_help">MESSAGE
+                                                </small>
+                                            </div>
+
+                                            <div class="sc col-12 pt-1em">
+                                                <label class="sc sub-title-1"
+                                                       for="text_confirm_password">Confirm New
+                                                    Password</label>
+                                                <input class="sc form-control sub-title-1"
+                                                       id="text_confirm_password"
+                                                       name="confirm_password" type="text"
+                                                       aria-describedby="confirm_password_help"
+                                                       placeholder="confirm password">
+                                                <small class="sc form-text text-muted caption pt-sm"
+                                                       id="confirm_password_help">MESSAGE
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="card-footer text-right">
+                            <a class="sc btn btn-primary text-button text-nowrap" th:href="@{/student}" role="button">Save Changes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

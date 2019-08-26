@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main-layout}">
+<head>
+    <title>View Student List</title>
+</head>
+<body>
+<div layout:fragment="content" class="sc bg-athens-gray">
+    <main class="sc h-100 pt-6em">
+        <div class="container">
+            <div class="row">
+                <a class="col-1 sc btn btn-light font-weight-bold text-button back" role="button"><i
+                        class="fas fa-arrow-left mr-2"></i><span th:text="#{sc.BACK}">back</span></a>
+            </div>
+
+            <div class="sc row mt-2em">
+                <h3 class="sc col-12 h3 text-silver font-weight-bold" th:text="#{sc.ViewStudentList}">View Student List</h3>
+            </div>
+            <form action="/teacher/view-student-list" th:object="${user}">
+                <div class="sc row pt-2em">
+                    <div class="sc col-lg-3 col-md-3 col-sm-12 pt-1em">
+                        <label class="sc sub-title-1" th:text="#{sc.Academic}">Academic</label>
+                        <select class="sc custom-select sub-title-1" name="filter_academic" id="filter_select_academic">
+                            <option selected>All</option>
+                            <option th:each="academic: ${academics}" th:object="${academic}" th:value="*{id}"
+                                    th:text="*{name}">All
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="sc col-lg-3 col-md-3 col-sm-12 pt-1em">
+                        <label class="sc sub-title-1" th:text="#{sc.Generation}">Generation</label>
+                        <select class="sc custom-select sub-title-1" name="filter_generation"
+                                id="filter_select_generation">
+                            <option selected value="*">All</option>
+                        </select>
+                    </div>
+
+                    <div class="sc col-lg-3 col-md-3 col-sm-12 pt-1em">
+                        <label class="sc sub-title-1" th:text="#{sc.Course}">Course</label>
+                        <select class="sc custom-select sub-title-1" name="filter_course" id="filter_select_course">
+                            <option selected value="*">All</option>
+                        </select>
+                    </div>
+
+                    <div class="sc col-lg-3 col-md-3 col-sm-12 pt-1em">
+                        <label class="sc sub-title-1" th:text="#{sc.Classroom}">Classroom</label>
+                        <select class="sc custom-select sub-title-1" name="filter_classroom"
+                                id="filter_select_classroom">
+                            <option selected value="*">All</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sc row pt-2em">
+                    <div class="col-md-12 d-flex justify-content-start align-items-end">
+                        <input type="submit" value="search" class="sc btn btn-primary text-button" th:value="#{sc.search}">
+                    </div>
+                </div>
+                <input id="limitStatic" name="limitStatic" type="hidden" th:value="${limitStatic}">
+            </form>
+            <div class="sc row pt-2em">
+                <div class="col-12">
+                    <table class="sc table table-bordered bg-white">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col" th:text="#{sc.id}">Id</th>
+                            <th scope="col" th:text="#{sc.StudentName}">Student Name</th>
+                            <th scope="col" th:text="#{sc.Gender}">Gender</th>
+                            <th scope="col" th:text="#{sc.DateOfBirth}">Date of Birth</th>
+                            <th scope="col" th:text="#{sc.PhoneNumber}">Phone Number</th>
+                            <th scope="col" th:text="#{sc.EmailAddress}">Email Address</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="student :${students}">
+                            <td th:text="${student.id}">
+                                <!--id-->
+                            </td>
+                            <td th:text="${student.fullName}">
+                                <!--name-->
+                            </td>
+                            <td th:text="${student.gender}">
+                                <!--gender-->
+                            </td>
+                            <td th:text="${student.dob}">
+                                <!--dob-->
+                            </td>
+                            <td th:text="${student.phone}">
+                                <!--phone-->
+                            </td>
+                            <td th:text="${student.email}">
+                                <!--email-->
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="sc row pt-1em pb-2em">
+                <div class="col-lg-2 col-md-3 col-sm-12">
+                    <label class="sc sub-title-1" th:text="#{sc.ItemPerPage}">Item Per Page</label>
+                    <select class="sc custom-select sub-title-1" id="select_limit">
+                        <option th:attr="selected = ${limitStatic eq 10 ? 'selected' : null}" value="10">10</option>
+                        <option th:attr="selected = ${limitStatic eq 15 ? 'selected' : null}" value="15">15</option>
+                        <option th:attr="selected = ${limitStatic eq 20 ? 'selected' : null}" value="20">20</option>
+                    </select>
+                </div>
+
+                <!--Pagination-->
+                <div class="sc col-lg-10 col-md-9 col-sm-12 d-flex justify-content-end align-items-end pt-1em">
+                    <nav aria-label="Page navigation example slide-pagination" th:if="${paging.totalPages} > 1">
+                        <ul class="pagination pagination mb-0">
+                            <li class="page-item"><a class="page-link" th:href="@{/teacher/view-student-list/(page=1)}">First</a></li>
+                            <li class="page-item">
+                                <a class="page-link" aria-label="Previous" th:href="@{/teacher/view-student-list/(page=${paging.previousPage})}" >
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only" th:text="#{sc.pagenetion.previous}">Previous</span>
+                                </a>
+                            </li>
+                            <li th:each="i: ${#numbers.sequence(paging.startPage, paging.endPage)}"
+                                th:class="${paging.page}==${i} ? 'page-item active': 'page-item' " >
+                                <a class="page-link" th:href="@{/teacher/view-student-list/(page=${i})}" th:text="${i}"></a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" aria-label="Next" th:href="@{/teacher/view-student-list/(page=${paging.nextPage})}">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only" th:text="#{sc.pagenetion.next}">Next</span>
+                                </a>
+                            </li>
+                            <li class="page-item"><a class="page-link" th:href="@{/student/view-student-list/(page=${paging.totalPages})}">Last</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<th:block layout:fragment="custom-script">
+    <script src="/script/app/view-student-list.js"></script>
+</th:block>
+</body>
+</html>

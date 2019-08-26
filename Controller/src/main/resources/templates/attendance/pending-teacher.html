@@ -1,0 +1,225 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main-layout}">
+<head>
+    <title>Attendance List</title>
+</head>
+<body>
+<div layout:fragment="content" class="sc bg-athens-gray">
+    <main class="sc h-100 pt-6em">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <a class="sc btn btn-light font-weight-bold text-button text-left back" role="button"><i class="fas fa-angle-left mr-2"></i><span th:text="#{sc.BACK}">back</span></a>
+                </div>
+            </div>
+            <div class="sc row pt-2em">
+                <h3 class="sc col-12 h3 text-silver font-weight-bold"><span class="font-weight-normal">Pending</span>Permission
+                </h3>
+            </div>
+            <div class="sc row pt-2em pb-2em">
+                <div class="sc col-12">
+                    <div class="table-responsive">
+                        <table class="sc table table-bordered bg-white">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col" th:text="#{sc.id}">No</th>
+                                <th scope="col" th:text="#{sc.RequestBy}">Requested By</th>
+                                <th scope="col" th:text="#{sc.Type}">Type</th>
+                                <th scope="col" th:text="#{sc.DateFrom}">Date From</th>
+                                <th scope="col" th:text="#{sc.DateTo}">Date To</th>
+                                <th scope="col" th:text="#{sc.InstructorChecked}">Instructor Checked</th>
+                                <th scope="col" th:text="#{sc.AdminChecked}">Admin Checked</th>
+                                <th scope="col" th:text="#{sc.Status}">Status</th>
+                                <th scope="col" th:text="#{sc.Action}">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="attendance, iter :${attendances}" th:object="${attendance}">
+                                <td th:text="${iter.count}"></td>
+                                <td th:text="${attendance.classenroll.user.fullName}"></td>
+                                <td>
+                                    <span class="badge badge-pill badge-primary"
+                                          th:text="${attendance.leaveStatus} eq 'p' ? 'Take leave':''">
+                                        <!--take leave-->
+                                    </span>
+                                    <span class="badge badge-pill badge-warning"
+                                          th:text="${attendance.leaveStatus} eq 'l' ? 'Late':''">
+                                        <!--late-->
+                                    </span>
+                                    <span class="badge badge-pill badge-secondary"
+                                          th:text="${attendance.leaveStatus} eq 'le' ? 'Leave early':''">
+                                        <!--leave early-->
+                                    </span>
+                                    <span class="badge badge-pill badge-secondary"
+                                          th:text="${attendance.leaveStatus} eq 'g' ? 'Go outside':''">
+                                        <!--go outside-->
+                                    </span>
+                                </td>
+                                <td th:text="${attendance.dateFrom}"></td>
+                                <td th:text="${attendance.dateTo}"></td>
+                                <td>
+                                    <span class="badge badge-pill badge-warning"
+                                          th:text="${attendance.teacherResponseStatus} eq 'p' ? 'Pending':''">
+                                        <!--pending-->
+                                    </span>
+                                    <span class="badge badge-pill badge-danger"
+                                          th:text="${attendance.teacherResponseStatus} eq 'r' ? 'Rejected':''">
+                                        <!--rejected-->
+                                    </span>
+                                    <span class="badge badge-pill badge-success"
+                                          th:text="${attendance.teacherResponseStatus} eq 'a' ? 'Accepted':''">
+                                        <!--accepted-->
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge badge-pill badge-warning"
+                                          th:text="${attendance.adminResponseStatus} eq 'p' ? 'Pending':''">
+                                        <!--pending-->
+                                    </span>
+                                    <span class="badge badge-pill badge-danger"
+                                          th:text="${attendance.adminResponseStatus} eq 'r' ? 'Rejected':''">
+                                        <!--rejected-->
+                                    </span>
+                                    <span class="badge badge-pill badge-success"
+                                          th:text="${attendance.adminResponseStatus} eq 'a' ? 'Accepted':''">
+                                        <!--accepted-->
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge badge-pill badge-warning"
+                                          th:text="${attendance.status} eq 'p' ? 'Pending':''">
+                                        <!--pending-->
+                                    </span>
+                                    <span class="badge badge-pill badge-danger"
+                                          th:text="${attendance.status} eq 'r' ? 'Rejected':''">
+                                        <!--rejected-->
+                                    </span>
+                                    <span class="badge badge-pill badge-success"
+                                          th:text="${attendance.status} eq 'a' ? 'Accepted':''">
+                                        <!--accepted-->
+                                    </span>
+                                </td>
+                                <td>
+                                    <a class="badge badge-primary attendance-operation"
+                                       th:attrappend="data-id=${attendance.id}">
+                                        <i class="sc far fa-smile square text-white" ></i></a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal fade" id="successful-modal" role="dialog" aria-hidden="true" aria-labelledby="modal_title" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 50%">
+            <div class="modal-content">
+                <div class="sc sc-modal-head">
+                    <div class="row">
+                        <h3 class="sc col-12 h3 font-weight-bold text-silver pt-sm px-1em">Accept/Reject Request Permission</h3>
+                    </div>
+                </div>
+
+                <div class="sc sc-modal-body modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="sc col-6 pt-1em">
+                                        <label class="sc sub-title-1">Permission Type</label>
+                                        <input class="sc form-control sub-title-1"
+                                               id="permission_type"
+                                               name="attendance.leave_status"
+                                               type="text" placeholder="permission type"
+                                               readonly>
+                                    </div>
+
+                                    <div class="w-100"></div>
+
+                                    <div class="sc col-6 pt-1em" id="requested_date_group">
+                                        <label class="sc sub-title-1">Requested Date</label>
+                                        <input class="sc form-control sub-title-1 attendance-data"
+                                               id="requested_date" type="text"
+                                               placeholder="requested date" readonly>
+                                    </div>
+
+                                    <div class="sc col-6 pt-1em" id="leave_date_group">
+                                        <label class="sc sub-title-1">Leave Date</label>
+                                        <input class="sc form-control sub-title-1 attendance-data"
+                                               id="leave_date"
+                                               type="text" placeholder="leave date" readonly>
+                                    </div>
+
+                                    <div class="sc col-6 pt-1em" id="leave_time_group">
+                                        <label class="sc sub-title-1">Leave Time</label>
+                                        <input class="sc form-control sub-title-1 attendance-data"
+                                               id="leave_time"
+                                               type="text" placeholder="leave time" readonly>
+                                    </div>
+
+                                    <div class="sc col-6 pt-1em" id="arrive_time_group">
+                                        <label class="sc sub-title-1">Arrive Time</label>
+                                        <input class="sc form-control sub-title-1 attendance-data"
+                                               id="arrive_time"
+                                               type="text" placeholder="arrive time" readonly>
+                                    </div>
+
+                                    <div class="sc col-6 pt-1em" id="from_date_group">
+                                        <label class="sc sub-title-1">From Date</label>
+                                        <input class="sc form-control sub-title-1 attendance-data"
+                                               id="from_date"
+                                               type="text" placeholder="from date" readonly>
+                                    </div>
+
+                                    <div class="sc col-6 pt-1em" id="to_date_group">
+                                        <label class="sc sub-title-1">To Date</label>
+                                        <input class="sc form-control sub-title-1 attendance-data"
+                                               id="to_date"
+                                               type="text" placeholder="to date" readonly>
+                                    </div>
+
+                                    <div class="sc col-6 pt-1em" id="duration_group">
+                                        <label class="sc sub-title-1">Duration</label>
+                                        <input class="sc form-control sub-title-1 attendance-data"
+                                               id="duration"
+                                               type="text" placeholder="duration" readonly>
+                                    </div>
+
+                                    <div class="sc col-12 pt-1em" id="reason_group">
+                                        <label class="sc sub-title-1">Reason</label>
+                                        <textarea
+                                                class="sc form-control sub-title-1 attendance-data"
+                                                id="reason"
+                                                rows="5" style="resize: none;"
+                                                readonly></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sc sc-modal-footer">
+                    <form action="/attendance" id="form-teacher-confirm-request" method="post" class="d-inline">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                        <button type="submit" id="accept-request" class="sc btn btn-outline-success text-button" th:text="#{sc.Accept}">Accept</button>
+                    </form>
+
+                    <form action="/attendance/" id="form-teacher-reject-request" method="post" class="d-inline sc pl-1em">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                        <a id="reject-request" class="sc btn btn-outline-danger text-button" th:text="#{sc.reject}">Reject</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div layout:fragment="custom-script">
+    <script type="text/javascript" th:src="@{/script/app/pending-permission-teacher.js}"></script>
+    <script type="text/javascript" th:src="@{/script/app/view-permission.js}"></script>
+</div>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main-layout}">
+<head>
+    <title>Teacher</title>
+</head>
+<body>
+<div layout:fragment="content" class="sc bg-athens-gray">
+    <main class="sc h-100">
+        <div class="container">
+            <div class="sc row pt-2em">
+                <h3 class="sc col-12 h3 text-silver font-weight-bold" th:text="#{sc.Teacher}">Teacher</h3>
+            </div>
+
+            <div class="sc row pt-2em">
+                <div class="col-3">
+                    <label class="sc sub-title-2" for="select_academic" th:text="#{sc.Academic}">Academic</label>
+                    <select class="custom-select sc caption" id="select_academic" name="academic">
+                        <option selected="">All</option>
+                    </select>
+                </div>
+
+                <div class="col-3">
+                    <label for="select_generation" lass="sc sub-title-2" th:text="#{sc.Generation}">Generation</label>
+                    <select class="custom-select sc caption" id="select_generation" name="generation">
+                        <option selected="">All</option>
+                    </select>
+                </div>
+
+                <div class="col-3">
+                    <label for="select_course" lass="sc sub-title-2" th:text="#{sc.Course}">Course</label>
+                    <select class="custom-select sc caption" id="select_course" name="course">
+                        <option selected="">All</option>
+                    </select>
+                </div>
+
+                <div class="col-3">
+                    <label for="select_classroom" lass="sc sub-title-2" th:text="#{sc.Classroom}">Classroom</label>
+                    <select class="custom-select sc caption" id="select_classroom" name="classroom">
+                        <option selected="">All</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="sc row pt-1em">
+                <div class="col-4">
+                    <label class="sc sub-title-2" for="label_search" th:text="#{sc.searchFullName}">Search Fullname</label>
+                    <input class="form-control sc caption" id="label_search" name="query" type="text" aria-describedby="search_help" placeholder="fullname" th:text="#{sc.full-name}">
+                </div>
+
+                <div class="d-flex col-8 justify-content-end align-items-center">
+                    <a class="sc btn btn-primary text-nowrap text-button" id name href="#" role="button"><i class="fas fa-user mr-2"></i><span th:text="#{sc.NEW}">New</span></a>
+                </div>
+            </div>
+
+            <div class="sc row pt-4em">
+                <div class="col-12">
+                    <table class="table table-bordered">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col" th:text="#{sc.id}">Id</th>
+                            <th scope="col" th:text="#{sc.FullName}">Fullname</th>
+                            <th scope="col" th:text="#{sc.sex}">Sex</th>
+                            <th scope="col" th:text="#{sc.DateOfBirth}">Date of Birth</th>
+                            <th scope="col" th:text="#{sc.phone-number}">Phone Number</th>
+                            <th scope="col" th:text="#{sc.emailaddress}">Email Address</th>
+                            <th scope="col" th:text="#{sc.Function}">Function</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Heng Sengthai</td>
+                            <td>Male</td>
+                            <td>06/06/1996</td>
+                            <td>012 123 123</td>
+                            <td>hengsengthai@gmail.com</td>
+                            <td>
+                                <a class="badge badge-primary" href="/dora/SomChbab/generation/view.html"><i class="sc far fa-smile square"></i></a>
+                                <a class="badge badge-warning" href="/dora/SomChbab/generation/edit.html"><i class="sc fas fa-pencil-alt square text-white"></i></a>
+                                <a class="badge badge-danger" href="/dora/SomChbab/generation/"><i class="sc fas fa-trash-alt square"></i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-2">
+                    <label class="sc sub-title-2" for="select_page" th:text="#{sc.ItemPerPage}">Item Per Page</label>
+                    <select class="custom-select sc caption" id="select_page" name="page">
+                        <option selected="">All</option>
+                    </select>
+                </div>
+
+                <div class="d-flex col-10 justify-content-end align-items-end">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination pagination-sm mb-0">
+                            <li class="page-item"><a class="page-link" href="#" th:text="#{sc.Previous}">Previous</a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#" th:text="#{sc.Next}">Next</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

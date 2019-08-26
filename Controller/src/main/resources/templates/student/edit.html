@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main-layout}">
+<head>
+    <title>Edit Student</title>
+</head>
+<body>
+<div layout:fragment="content" class="sc bg-athens-gray">
+    <main class="sc h-100 pt-6em">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <a class="sc btn btn-light font-weight-bold text-button text-left back" role="button">
+                        <i class="fas fa-angle-left mr-2"></i>
+                        <span th:text="#{sc.BACK}">back</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="sc row pt-2em">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="sc breadcrumb h3 text-silver font-weight-bold bg-athens-gray">
+                            <li class="breadcrumb-item"><a class="back primaryForeColor link-client-custom" th:text="#{sc.Student}">Student</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                <span class="font-weight-normal" th:text="#{sc.Edit}">Edit</span><span th:text="#{sc.Student}">Student</span>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="sc row pt-2em pb-3em">
+                <div class="col-12">
+                    <form action="/student/update" th:method="POST" th:object="${student}" enctype="multipart/form-data">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                        <input type="hidden" th:field="*{id}" th:value="${student.id}">
+                        <div class="sc card shadow-1">
+                            <div class="card-header sc card-head">
+                                <h6 class="sc sub-title-1 font-weight-bold" th:text="#{sc.EditStudent}">Edit Student</h6>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="sc row px-4em py-1em">
+                                    <div class="col-lg-3 col-md-4 col-12">
+                                        <div class="row">
+                                            <img id="img-preview" class="sc col-12 profile-image-container-edit" src="https://semantic-ui.com/images/avatar2/large/matthew.png" th:src="'/image/' + ${student.photo}" width="100px" height="100px">
+                                            <div class="sc col-12 pt-1em">
+                                                <div class="custom-file">
+                                                    <input id="file-selector" class="sc custom-file-input sub-title-1" type="file" name="file" accept="image/*">
+                                                    <label class="sc custom-file-label sub-title-1" for="file-selector" th:text="#{sc.browser}">browser</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-9 col-md-8 col-12">
+                                        <div class="row">
+                                            <div class="sc col-lg-9 col-md-8 col-12 pt-1em">
+                                                <label class="sc sub-title-1" th:text="#{sc.FullName}">Full Name</label>
+                                                <input class="sc form-control sub-title-1" th:field="*{fullName}"
+                                                       name="fullname" type="text" aria-describedby="full_name_help"
+                                                       placeholder="fullname" th:placeholder="#{sc.full-name}">
+                                            </div>
+
+                                            <div class="sc col-lg-3 col-md-4 col-12 pt-1em">
+                                                <label class="sc sub-title-1" th:text="#{sc.Gender}">Gender</label>
+                                                <select class="sc form-control sub-title-1" th:field="${student.gender}">
+                                                    <option th:value="'m'" th:text="#{sc.male}"></option>
+                                                    <option th:value="'f'" th:text="#{sc.female}"></option>
+                                                </select>
+                                            </div>
+
+                                            <div class="sc col-12 pt-1em">
+                                                <label class="sc sub-title-1" th:text="#{sc.DateOfBirth}">Date of Birth</label>
+                                                <input class="sc form-control sub-title-1 date" th:field="${student.dob}" type="text" aria-describedby="dob_help" placeholder="date of birth" th:placeholder="#{sc.date-of-birth}">
+                                            </div>
+
+                                            <div class="sc col-12 pt-1em">
+                                                <label class="sc sub-title-1" th:text="#{sc.Nationality}">Nationality</label>
+                                                <input class="sc form-control sub-title-1" th:field="${student.nationality}" type="text" aria-describedby="nationality_help" placeholder="nationality" th:placeholder="#{sc.nationality}">
+                                            </div>
+
+                                            <div class="sc col-12 pt-1em">
+                                                <label class="sc sub-title-1" th:text="#{sc.PhoneNumber}">Phone Number</label>
+                                                <input class="sc form-control sub-title-1" th:field="${student.phone}" type="text" aria-describedby="phone_number_help" placeholder="phone number" th:placeholder="#{sc.phone-number}">
+                                            </div>
+
+                                            <div class="sc col-12 pt-1em">
+                                                <label class="sc sub-title-1" th:text="#{sc.EmailAddress}">Email Address</label>
+                                                <input class="sc form-control sub-title-1" th:field="${student.email}" type="email" aria-describedby="email_address_help" placeholder="email address" th:placeholder="#{sc.emailaddress}">
+                                            </div>
+
+                                            <div class="sc col-12 pt-1em">
+                                                <label class="sc sub-title-1" th:text="#{sc.PlaceOfBirth}">Place of Birth</label>
+                                                <textarea class="sc form-control sub-title-1" th:field="${student.pob}" rows="3"></textarea>
+                                            </div>
+
+                                            <div class="sc col-12 pt-1em">
+                                                <label class="sc sub-title-1" th:text="#{sc.Password}">Password</label>
+                                                <input class="sc form-control sub-title-1" type="text" aria-describedby="password_help" placeholder="password" id="password" name="password" th:placeholder="#{sc.password}">
+                                            </div>
+                                            <div class="sc col-lg-3 col-md-4 col-12 pt-1em">
+                                                <label class="sc sub-title-1" th:text="#{sc.Status}">Status</label>
+                                                <select class="custom-select sc sub-title-1" th:field="${student.status}">
+                                                    <option th:value="true">Active</option>
+                                                    <option th:value="false" th:attr="selected = ${student.status ne true ? 'selected' : null}">Inactive</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-footer text-muted text-right">
+                                <button type="submit" class="sc col-lg-1 col-md-2 col-sm-12 btn btn-primary text-button text-nowrap" th:text="#{sc.UPDATE}">Update</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="sc col-12 pt-2em">
+                    <!--Start new Form for Update-->
+                    <form action="/student/update/classroom" th:method="POST" enctype="multipart/form-data" th:object="${student}" th:if="${not #lists.isEmpty(student.classrooms)}">
+                        <div class="sc card shadow-1 custom-top">
+                            <div class="sc card-header card-head">
+                                <h6 class="sc sub-title-1 font-weight-bold" th:text="#{sc.ViewStudentInClass}">View Student In Class</h6>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="sc row px-4em py-1em" th:each="classroom, iter : ${student.classrooms}">
+                                    <div class="col-lg-8 col-md-6 col-12" style=" margin: 0 auto;">
+                                        <div class="row">
+                                                <div class="sc col-12">
+                                                    <label class="sc sub-title-1" th:text="#{sc.InAcademic}">In Academic</label>
+                                                    <input class="sc form-control sub-title-1" type="text" readonly th:value="${classroom.course.generation.academic.name}" placeholder="In academic" th:placeholder="#{sc.InAcademic}">
+                                                </div>
+
+                                                <div class="sc col-12 pt-1em">
+                                                    <label class="sc sub-title-1" th:text="#{sc.InGeneration}">In Generation </label>
+                                                    <input class="sc form-control sub-title-1" readonly th:value="${classroom.course.generation.name}" placeholder="In generation" th:placeholder="#{sc.pinGeneration}">
+                                                </div>
+
+                                                <div class="sc col-12 pt-1em">
+                                                    <label class="sc sub-title-1" th:text="#{sc.InCourse}">In Course</label>
+                                                    <input class="sc form-control sub-title-1" readonly type="text" th:value="${classroom.course.name}" placeholder="In course" th:placeholder="#{sc.pinCourse}">
+                                                </div>
+
+                                                <div class="sc col-12 py-1em">
+                                                    <label class="sc sub-title-1" th:text="#{sc.InClass}">In Class</label>
+                                                    <input class="sc form-control sub-title-1" readonly th:value="${classroom.className.name}" placeholder="In generation" th:placeholder="#{sc.pinGeneration}">
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<div layout:fragment="custom-script">
+    <script src="/script/app/formatDate.js"></script>
+</div>
+</body>
+</html>

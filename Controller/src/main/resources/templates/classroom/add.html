@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main-layout}">
+<head>
+    <title>Add Classroom</title>
+</head>
+<body>
+<div layout:fragment="content" class="sc bg-athens-gray">
+    <main class="sc h-100 pt-6em">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <a class="sc btn btn-light font-weight-bold text-button text-left back" role="button"><i class="fas fa-angle-left mr-2"></i><span th:text="#{sc.BACK}">back</span></a>
+                </div>
+            </div>
+
+            <div class="sc row pt-2em">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="sc breadcrumb h3 text-silver font-weight-bold bg-athens-gray">
+                            <li class="breadcrumb-item">
+                                <a th:href="@{/classroom}" th:text="#{sc.Classroom}">Classroom</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                <span class="font-weight-normal" th:text="#{sc.Add}">Add</span>
+                                <span th:text="#{sc.NewClassroom}">New Classroom</span>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="sc row pt-2em">
+                <div class="col-12">
+                    <form action="/classroom/create" method="post" id="has_select">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                        <div class="sc card shadow-1">
+                            <div class="sc card-header card-head">
+                                <h6 class="sc sub-title-1 font-weight-bold" th:text="#{sc.NewClassroom}">New Classroom</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="col-12">
+                                    <label class="sc sub-title-1" for="select_academic" th:text="#{sc.SelectAcademic}">Select Academic</label>
+                                    <span class="text-danger" id="required_select_academic"></span>
+                                    <select class="sc custom-select sub-title-1" id="select_academic">
+                                        <option value="0" selected th:text="#{sc.choose_academic}">choose academic</option>
+                                        <option th:each="academic : ${academics}" th:text="${academic.name}" th:value="${academic.id}"></option>
+                                    </select>
+                                </div>
+                                <div class="sc col-12 pt-1em">
+                                    <label class="sc sub-title-1" for="select_generation" th:text="#{sc.selectGeneration}">Select Generation</label>
+                                    <span class="text-danger" id="required_select_generation"></span>
+                                    <select class="sc custom-select sub-title-1" id="select_generation">
+                                    </select>
+                                </div>
+                                <div class="sc col-12 pt-1em">
+                                    <label class="sc sub-title-1" th:text="#{sc.SelectCourse}">Select Course</label>
+                                    <span class="text-danger" id="required_select_course"></span>
+                                    <select class="sc custom-select sub-title-1 withEvent" id="select_course" name="course.id">
+                                        <!--<option value="0" selected>choose class name</option>-->
+                                    </select>
+                                </div>
+                                <div class="sc col-12 py-1em">
+                                    <label class="sc sub-title-1" th:text="#{sc.SelectClassname}">Select Classname</label>
+                                    <span class="text-danger" id="required_select_classname"></span>
+                                    <select class="sc custom-select sub-title-1" id="select_classname" name="className.id">
+                                        <option value="0" selected th:text="#{sc.chooseClassname}">choose classname</option>
+                                        <option th:each="classname : ${classnames}" th:text="${classname.name}" th:value="${classname.id}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="card-footer text-muted text-right">
+                                <button type="submit" class="sc col-lg-1 col-md-2 col-sm-12 btn btn-primary text-button text-nowrap" th:text="#{sc.Create}">Create</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<div layout:fragment="custom-script">
+    <script src="/script/app/create-classroom.js"></script>
+</div>
+</body>
+</html>

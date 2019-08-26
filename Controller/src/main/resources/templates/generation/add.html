@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main-layout}">
+<head>
+    <title>Add Generation</title>
+</head>
+<body>
+<div layout:fragment="content" class="sc bg-athens-gray">
+    <main class="sc h-100 pt-6em">
+        <div class="container">
+
+            <!--Back-->
+            <div class="row">
+                <div class="col-12">
+                    <a class="sc btn btn-light font-weight-bold text-button text-left back" role="button"><i class="fas fa-angle-left mr-2"></i><span th:text="#{sc.BACK}">back</span></a>
+                </div>
+            </div>
+
+            <!--Title-->
+            <div class="sc row pt-2em">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="sc breadcrumb h3 text-silver font-weight-bold bg-athens-gray">
+                            <li class="breadcrumb-item"><a th:href="@{/generation}" th:text="#{sc.Generation}">Generation</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                <span class="font-weight-normal" th:text="#{sc.Add}"></span><span th:text="#{sc.NewGeneration}"></span>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+
+            <!--Card-->
+            <div class="sc row pt-2em">
+                <div class="col-12">
+                    <form action="/generation/create" th:method="POST" th:object="${generation}" id="has_select">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                        <div class="sc card shadow-1">
+                            <div class="sc card-header card-head">
+                                <h6 class="sc sub-title-1 font-weight-bold" th:text="#{sc.NewGeneration}">New Generation</h6>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="sc col-12">
+                                    <label class="sc sub-title-1" th:text="#{sc.SelectAcademic}">Select Academic</label>
+                                    <span class="text-danger" id="required_select"></span>
+
+                                    <div class="sc col-lg-2 col-3" style="padding-left:0px">
+                                        <select class="custom-select sc sub-title-1" required th:field="${generation.academic.id}">
+                                            <option th:value="0" selected disabled>choose one</option>
+                                            <option th:each="academic : ${academics}" th:text="*{name}"
+                                                    th:value="${academic.id}" th:object="${academic}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="sc col-12 pt-1em pb-1em">
+                                    <label class="sc sub-title-1" th:text="#{sc.GenerationName}">Generation Name</label>
+                                    <span class="text-danger" th:if="${#fields.hasErrors('name')}"
+                                          th:text="'*' + #{generation_name.valid}"></span>
+                                    <input class="sc form-control sub-title-1" th:value="*{name}"
+                                           th:field="*{name}" type="text" aria-describedby="generation_help"
+                                           placeholder="generation name" th:placeholder="#{sc.generation-name}">
+                                </div>
+                            </div>
+
+                            <div class="card-footer text-muted text-right">
+                                <button type="submit" class="sc col-lg-1 col-md-2 col-sm-12 btn btn-primary text-button text-nowrap" th:text="#{sc.Create}">Create</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<div layout:fragment="custom-script">
+    <script src="/script/app/create-generation.js"></script>
+</div>
+</body>
+</html>

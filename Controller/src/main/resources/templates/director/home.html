@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main-layout}">
+<head>
+    <title>Homepage</title>
+</head>
+<body>
+<div layout:fragment="content" class="sc bg-pickled-bluewood h-100">
+    <main class="sc h-100 pt-6em">
+        <div class="sc container mb-4em">
+            <div class="sc row my-4em mx-1em">
+                <h2 class="sc col-12 h2 text-white font-weight-bolder">
+                    <span th:text="#{sc.Welcome}"></span>
+                    <span th:text="${#authentication.principal.fullName + '!'}"></span>
+                </h2>
+                <h4 class="sc col-12 h4 text-white pt-sm" th:text="#{sc.WCWHU}">What can we help you?</h4>
+            </div>
+
+            <div class="sc row bg-athens-gray h-100 round-3 mb-2em shadow-2">
+                <div class="container">
+                    <div class="sc row mx-1em my-2em">
+                        <h3 class="sc col-12 h3 font-weight-bold text-silver" th:text="#{sc.Summary}">Summary</h3>
+                    </div>
+
+                    <div class="sc row mx-1em mb-4em">
+                        <div class="sc col-lg-4 col-12 pt-1em">
+                            <div class="sc bg-white round-1 px-2em py-2em shadow-1">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <i class="sc fas fa-envelope-open-text fa-4x text-yellow"></i>
+                                        <h5 class="sc h5 pt-1em font-weight-bold text-storm-grey" th:text="#{sc.today}">today</h5>
+                                    </div>
+
+                                    <div class="col-7 text-right">
+                                        <h5 class="sc h5 font-weight-bolder" th:text="${requestingPermission} eq null ? 'None': ${requestingPermission}">
+                                            <!--requesting permission-->
+                                        </h5>
+                                        <h6 class="sc h6" th:text="#{sc.requesting-permission}">requesting permission</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sc col-lg-4 col-12 pt-1em">
+                            <div class="sc bg-white round-1 px-2em py-2em shadow-1">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <i class="sc fas fa-clock fa-4x text-orange"></i>
+                                        <h5 class="sc h5 pt-1em font-weight-bold text-nowrap text-storm-grey" th:text="#{sc.LastWeek}">last week</h5>
+                                    </div>
+
+                                    <div class="col-7 text-right">
+                                        <h5 class="sc h5 font-weight-bolder" th:text="${requestedPermission} eq null ? 'None': ${requestedPermission}">
+                                            <!--requested permission-->
+                                        </h5>
+                                        <h6 class="sc h6" th:text="#{sc.requsted-permission}">requested permission</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sc col-lg-4 col-12 pt-1em">
+                            <div class="sc bg-white round-1 px-2em py-2em shadow-1">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <i class="sc fas fa-user fa-4x text-purple"></i>
+                                        <h5 class="sc h5 pt-1em font-weight-bold text-nowrap text-storm-grey" th:text="#{sc.LastMonth}">last month</h5>
+                                    </div>
+
+                                    <div class="col-7 text-right">
+                                        <h5 class="sc h5 font-weight-bolder" th:text="${mostLate} eq null ? 'None': ${mostLate}">
+                                            <!--fullname-->
+                                        </h5>
+                                        <h6 class="sc h6" th:text="#{sc.most-late}">most late</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sc row bg-athens-gray h-100 round-3 shadow-2">
+                <div class="container">
+                    <div class="sc row mx-1em my-2em">
+                        <h3 class="sc col-12 h3 font-weight-bold text-silver" th:text="#{sc.View}">Views</h3>
+                    </div>
+
+                    <div class="sc row mx-1em mb-4em">
+                        <div class="sc col-lg-4 col-md-6 col-sm-12 mb-sm-2em">
+                            <a class="sc d-flex btn btn-white btn-block round-border-1 view-size-lg shadow-1 active" th:href="@{/director/view-report}" role="button" aria-pressed="true">
+                                <span class="sc d-flex h5 font-weight-bold text-storm-grey text-left justify-content-start align-items-center padding-left-sm" th:text="#{sc.ViewReports}">View Reports</span></a>
+                        </div>
+
+                        <div class="sc col-lg-4 col-md-6 col-sm-12">
+                            <a class="sc d-flex btn btn-white btn-block round-border-1 view-size-lg shadow-1 active" th:href="@{/director/{editId}/profile(editId=${director.id})}" role="button" aria-pressed="true">
+                                <span class="sc d-flex h5 font-weight-bold text-storm-grey text-left justify-content-start align-items-center padding-left-sm" th:text="#{sc.MyProfile}">My Profile</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

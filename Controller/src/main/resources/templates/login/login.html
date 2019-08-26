@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/login-layout}">
+<head>
+    <title>Login</title>
+</head>
+<body>
+<div layout:fragment="content" class="sc bg-pickled-bluewood h-100">
+        <main class="sc h-100">
+            <div class="container h-100">
+                <div class="sc row h-100  d-flex justify-content-center align-items-center">
+                    <div class="sc col-md-5 col-sm-10 col-7 bg-white round-1 shadow-2">
+                        <div class="sc row d-flex justify-content-center">
+                            <form class="col-10" method="post" action="/login">
+                                <div class="sc row pt-3em justify-content-center">
+                                    <img class="somchhbab-logo-login" src="image/somchbab-login-logo.png" alt="">
+                                    <p class="sc col-12 body-1 text-center pt-sm" th:text="#{sc.PleaseLogin}">Please Login!</p>
+                                </div>
+
+                                <!--Email Address-->
+                                <div class="sc row pt-1em">
+                                    <label class="sc sub-title-1" th:text="#{sc.EmailAddress}">Email Address</label>
+                                    <input class="sc form-control sub-title-1" id="text_email_address" name="email" type="text" placeholder="email address" th:placeholder="#{sc.emailaddress}">
+                                </div>
+
+                                <!--Password-->
+                                <div class="sc row pt-1em">
+                                    <label class="sc sub-title-1" th:text="#{sc.Password}">Password</label>
+                                    <input class="sc form-control sub-title-1" id="password" name="password" type="password" placeholder="password" th:placeholder="#{sc.password}" required>
+                                </div>
+
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+                                <!--Message-->
+                                <div class="sc row pt-1em text-center login-invalid-popup">
+                                    <span class="text-danger alert alert-danger text-center sc sub-title-1 login-invalid-popup-text mb-0" th:classappend="${session.message} eq null ? ' d-none' : ''"  th:text="${session.message}"></span>
+                                </div>
+
+                                <!--Login-->
+                                <div class="sc row pt-1em pb-3em">
+                                    <button class="sc btn btn-primary btn-block text-button text-nowrap" type="submit" th:text="#{sc.Login}">Login</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

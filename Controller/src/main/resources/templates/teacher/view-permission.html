@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main-layout}">
+<head>
+    <title>View Pending Permission</title>
+</head>
+<body>
+<div layout:fragment="content" class="sc bg-athens-gray">
+    <main class="sc h-100 pt-6em">
+        <div class="container">
+            <div class="row">
+                <a class="col-1 sc btn btn-light font-weight-bold text-button back" role="button"><i class="fas fa-arrow-left mr-2"></i><span th:text="#{sc.BACK}">back</span></a>
+            </div>
+
+            <div class="sc row mt-2em">
+                <h3 class="sc col-12 h3 text-silver font-weight-bold"><span class="font-weight-normal" th:text="#{sc.View}">View</span><span th:text="#{sc.PendingPermission}">Prending Permission</span>
+                </h3>
+            </div>
+
+            <div class="sc row mt-2em">
+                <div class="sc col-md-3 col-12 pt-1em">
+                    <label for="text_query" clsss="sc sub-title-1" th:text="#{sc.SearchBy}">Search By</label>
+                    <input class="sc form-control sub-title-1" id="text_query" name="query" type="text" aria-describedby="query_help" placeholder="search" th:placeholder="#{sc.search}">
+                </div>
+
+                <div class="sc col-md-3 col-12 pt-1em">
+                    <label class="sc sub-title-1" for="select_filter" th:text="#{sc.Filter}">Filter</label>
+                    <select class="sc custom-select sub-title-1" id="select_filter" name="filter">
+                        <option selected="">All</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="sc row mt-2em pb-2em">
+                <!-- Table Here -->
+                <div class="sc d-flex col-12">
+                    <div class="table-responsive">
+                        <table class="sc table table-bordered bg-white">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col" th:text="#{sc.id}">Id</th>
+                                <th scope="col" th:text="#{sc.RequestBy}">Requested By</th>
+                                <th scope="col" th:text="#{sc.Type}">Type</th>
+                                <th scope="col" th:text="#{sc.RequestingDate}">Requesting Date</th>
+                                <th scope="col" th:text="#{sc.AdminChecked}">Admin Checked</th>
+                                <th scope="col" th:text="#{sc.Status}">Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Ny Thyatdora</td>
+                                <td>Half/Full Day</td>
+                                <td>11/12/2019</td>
+                                <td>
+                                    <span class="badge badge-pill badge-primary">Prending</span>
+                                </td>
+                                <td>
+                                    <span class="badge badge-pill badge-info">Waiting</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

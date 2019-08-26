@@ -1,0 +1,312 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main-layout}">
+<head>
+    <title>View Personal Records</title>
+    <th:block layout:fragment="custom-css">
+        <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+    </th:block>
+</head>
+<body>
+<div layout:fragment="content" class="sc bg-athens-gray">
+    <main class="sc h-100 pt-6em">
+        <div class="container">
+            <div class="row">
+                <a class="col-1 sc btn btn-light font-weight-bold text-button back" role="button"><i
+                        class="fas fa-arrow-left mr-2"></i><span th:text="#{sc.BACK}">back</span></a>
+            </div>
+
+            <div class="sc row mt-2em">
+                <h3 class="sc col-12 h3 text-silver font-weight-bold"><span
+                        class="font-weight-normal" th:text="#{sc.View}">View</span><span
+                        th:text="#{sc.PersonalRecord}">Personal Record</span>
+                </h3>
+            </div>
+
+            <div class="sc row mt-2em">
+                <div class="col-12">
+                    <div class="row">
+                        <input type="hidden" id="user_id" th:value="${userId}">
+
+                        <div class="sc col-md-3 col-12 pt-1em">
+                            <label class="sc sub-title-1 pt-1em"
+                                   th:text="#{sc.Academic}">Academic</label>
+                            <select class="sc custom-select sub-title-1" id="select_academic">
+                                <option value="0" selected th:text="#{sc.choose_academic}">Choose
+                                    Academic
+                                </option>
+                                <option th:each="academic : ${academics}" th:text="${academic.name}"
+                                        th:value="${academic.id}"></option>
+                            </select>
+                        </div>
+
+                        <div class="sc col-md-3 col-12 pt-1em">
+                            <label class="sc sub-title-1 pt-1em" th:text="#{sc.Generation}">Generation</label>
+                            <select class="sc custom-select sub-title-1" id="select_generation">
+                                <option value="0" selected th:text="#{sc.choose_generation}">Choose
+                                    Generation
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="sc col-md-3 col-12 pt-1em">
+                            <label class="sc sub-title-1 pt-1em"
+                                   th:text="#{sc.Course}">Course</label>
+                            <select class="sc custom-select sub-title-1" id="select_course">
+                                <option value="0" selected th:text="#{sc.choose_course}">Choose
+                                    Course
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="sc col-md-3 col-12 pt-1em">
+                            <label class="sc sub-title-1 pt-1em" th:text="#{sc.Month}">Month</label>
+                            <div class="input-group date">
+                                <input type="text" class="form-control" id="date_picker">
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sc row pt-2em">
+                        <div class="col-12">
+                            <div class="sc card shadow-1">
+                                <div class="sc card-header card-head">
+                                    <h6 class="sc sub-title-1 font-weight-bold"
+                                        th:text="#{sc.StudentPerform}">Student Performance</h6>
+                                </div>
+
+                                <div class="card-body">
+                                    <table class="table table-borderless">
+                                        <thead>
+                                        <th class="d-none"></th>
+                                        <th class="d-none"></th>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td scope="row" th:text="#{sc.TotalGoOutside}">Total Go
+                                                Outside
+                                            </td>
+                                            <td class="text-right" id="total_go_outside">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td scope="row" th:text="#{sc.TotalLate}">Total Late
+                                            </td>
+                                            <td class="text-right" id="total_late">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td scope="row" th:text="#{sc.TotalPermission}">Total
+                                                Permission
+                                            </td>
+                                            <td class="text-right" id="total_permission">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td scope="row" th:text="#{sc.TotalAbsent}">Total
+                                                Absent
+                                            </td>
+                                            <td class="text-right" id="total_absent">0</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sc row pt-2em">
+                <h4 class="sc col-12 h4 text-silver font-weight-bold"
+                    th:text="#{RequestingList}">Requesting List</h4>
+
+                <!-- Table Here -->
+                <div class="sc d-flex col-12 pt-2em">
+                    <div class="table-responsive">
+                        <table class="sc table table-bordered bg-white">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col" th:text="#{sc.id}">Id</th>
+                                <th scope="col" th:text="#{sc.Type}">Type</th>
+                                <th scope="col" th:text="#{sc.DateFrom}">Date From</th>
+                                <th scope="col" th:text="#{sc.DateTo}">Date To</th>
+                                <th scope="col" th:text="#{sc.InstructorChecked}">Instructor
+                                    Checked
+                                </th>
+                                <th scope="col" th:text="#{sc.AdminChecked}">Admin Checked</th>
+                                <th scope="col" th:text="#{sc.Status}">Status</th>
+                                <th scope="col" th:text="#{sc.Action}">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="attendance, iter :${attendances}"
+                                th:object="${attendance}">
+                                <td th:text="${iter.count}"></td>
+                                <td>
+                                    <span class="badge badge-pill badge-primary"
+                                          th:text="${attendance.leaveStatus} eq 'p' ? 'Permission':''">
+                                        <!--permission-->
+                                    </span>
+                                    <span class="badge badge-pill badge-danger"
+                                          th:text="${attendance.leaveStatus} eq 'l' ? 'Late':''">
+                                        <!--late-->
+                                    </span>
+                                    <span class="badge badge-pill badge-secondary"
+                                          th:text="${attendance.leaveStatus} eq 'le' ? 'Leave early':''">
+                                        <!--leave early-->
+                                    </span>
+                                    <span class="badge badge-pill badge-secondary"
+                                          th:text="${attendance.leaveStatus} eq 'g' ? 'Go outside':''">
+                                        <!--go outside-->
+                                    </span>
+                                </td>
+                                <td th:text="${attendance.dateFrom}"></td>
+                                <td th:text="${attendance.dateTo}"></td>
+                                <td>
+                                    <span class="badge badge-pill badge-warning"
+                                          th:text="${attendance.teacherResponseStatus} eq 'p' ? 'Pending':''">Pending</span>
+                                    <span class="badge badge-pill badge-danger"
+                                          th:text="${attendance.teacherResponseStatus} eq 'r' ? 'Rejected':''">Pending</span>
+                                    <span class="badge badge-pill badge-success"
+                                          th:text="${attendance.teacherResponseStatus} eq 'a' ? 'Accepted':''">Pending</span>
+                                </td>
+                                <td>
+                                    <span class="badge badge-pill badge-warning"
+                                          th:text="${attendance.adminResponseStatus} eq 'p' ? 'Pending':''">Pending</span>
+                                    <span class="badge badge-pill badge-danger"
+                                          th:text="${attendance.adminResponseStatus} eq 'r' ? 'Rejected':''">Pending</span>
+                                    <span class="badge badge-pill badge-success"
+                                          th:text="${attendance.adminResponseStatus} eq 'a' ? 'Accepted':''">Pending</span>
+                                </td>
+                                <td>
+                                    <span class="badge badge-pill badge-warning"
+                                          th:text="${attendance.status} eq 'p' ? 'Pending':''">Pending</span>
+                                    <span class="badge badge-pill badge-danger"
+                                          th:text="${attendance.status} eq 'r' ? 'Rejected':''">Rejected</span>
+                                    <span class="badge badge-pill badge-success"
+                                          th:text="${attendance.status} eq 'a' ? 'Accepted':''">Accepted</span>
+                                </td>
+                                <td>
+                                    <a class="badge badge-primary attendance-operation" th:attrappend="data-id=${attendance.id}">
+                                        <i class="sc far fa-smile square text-white"></i>
+                                    </a>
+                                    <form th:action="@{/student/attendance/delete/{id}(id=${attendance.id})}" th:method="delete" style="display: inline;">
+                                        <a class="badge badge-danger delete" data-toggle="tooltip"
+                                           data-placement="top" title="delete">
+                                            <i class="sc fas fa-trash-alt square mt-1em text-white"></i>
+                                        </a>
+                                    </form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal fade" id="successful-modal" role="dialog" aria-hidden="true" aria-labelledby="modal_title" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 50%">
+            <div class="modal-content">
+                <div class="sc sc-modal-head">
+                    <div class="row">
+                        <h3 class="sc col-12 h3 font-weight-bold text-silver pt-sm px-1em">View Request Permission</h3>
+                    </div>
+                </div>
+
+                <div class="sc sc-modal-body modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="sc col-6 pt-1em">
+                                        <label class="sc sub-title-1">Permission Type</label>
+                                        <input class="sc form-control sub-title-1"
+                                               id="permission_type"
+                                               name="attendance.leave_status"
+                                               type="text" placeholder="permission type"
+                                               readonly>
+                                    </div>
+
+                                    <div class="w-100"></div>
+
+                                    <div class="sc col-6 pt-1em" id="requested_date_group">
+                                        <label class="sc sub-title-1">Requested Date</label>
+                                        <input class="sc form-control sub-title-1 attendance-data"
+                                               id="requested_date" type="text"
+                                               placeholder="requested date" readonly>
+                                    </div>
+
+                                    <div class="sc col-6 pt-1em" id="leave_date_group">
+                                        <label class="sc sub-title-1">Leave Date</label>
+                                        <input class="sc form-control sub-title-1 attendance-data"
+                                               id="leave_date"
+                                               type="text" placeholder="leave date" readonly>
+                                    </div>
+
+                                    <div class="sc col-6 pt-1em" id="leave_time_group">
+                                        <label class="sc sub-title-1">Leave Time</label>
+                                        <input class="sc form-control sub-title-1 attendance-data"
+                                               id="leave_time"
+                                               type="text" placeholder="leave time" readonly>
+                                    </div>
+
+                                    <div class="sc col-6 pt-1em" id="arrive_time_group">
+                                        <label class="sc sub-title-1">Arrive Time</label>
+                                        <input class="sc form-control sub-title-1 attendance-data"
+                                               id="arrive_time"
+                                               type="text" placeholder="arrive time" readonly>
+                                    </div>
+
+                                    <div class="sc col-6 pt-1em" id="from_date_group">
+                                        <label class="sc sub-title-1">From Date</label>
+                                        <input class="sc form-control sub-title-1 attendance-data"
+                                               id="from_date"
+                                               type="text" placeholder="from date" readonly>
+                                    </div>
+
+                                    <div class="sc col-6 pt-1em" id="to_date_group">
+                                        <label class="sc sub-title-1">To Date</label>
+                                        <input class="sc form-control sub-title-1 attendance-data"
+                                               id="to_date"
+                                               type="text" placeholder="to date" readonly>
+                                    </div>
+
+                                    <div class="sc col-6 pt-1em" id="duration_group">
+                                        <label class="sc sub-title-1">Duration</label>
+                                        <input class="sc form-control sub-title-1 attendance-data"
+                                               id="duration"
+                                               type="text" placeholder="duration" readonly>
+                                    </div>
+
+                                    <div class="sc col-12 pt-1em" id="reason_group">
+                                        <label class="sc sub-title-1">Reason</label>
+                                        <textarea
+                                                class="sc form-control sub-title-1 attendance-data"
+                                                id="reason"
+                                                rows="5" style="resize: none;"
+                                                readonly></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sc sc-modal-footer">
+                    <button class="sc col-lg-1 col-md-2 col-12 btn btn-primary text-button" data-dismiss="modal" type="button">Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<div layout:fragment="custom-script">
+    <script type="text/javascript" th:src="@{/script/app/bootstrap-datepicker.js}"></script>
+    <script type="text/javascript" th:src="@{/script/app/view-personal-records.js}"></script>
+    <script type="text/javascript" th:src="@{/script/app/view-permission.js}"></script>
+</div>
+</html>
